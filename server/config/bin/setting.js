@@ -9,10 +9,14 @@ var settingData = {
     frontPort: 3032, //前端port
     backPort: 8082 //后台port
 };
+//其他配置
+settingData['projectPath'] = settingData['basePath'] + "/project";
+settingData['resourcePath'] = settingData['basePath'] + "/resource";
+
 //应用配置
 var appConfig = {
     appid: 'wxf4676e44a9519526',
-    secret: '1a3f4856b36d6e96e83cb43862b39287',
+    secret: '1a3f4856b36d6e96e83cb43862b39287'
 };
 
 module.exports = {

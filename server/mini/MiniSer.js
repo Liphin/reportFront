@@ -15,21 +15,21 @@ function MiniSer() {
      * 微信小程序获取用户登录时的openId
      */
     this.getMiniUserOpenId = function (req, res) {
-        var arg = url.parse(request.url, true).query;
+        var arg = url.parse(req.url, true).query;
         var js_code = arg['js_code'];
 
         var uri = util.format(getUserOpenIdUrl, serverSerData.appConfig['appid'], serverSerData.appConfig['secret'], js_code);
         request.get(uri, function (err, resData, body) {
             if (!err && resData['statusCode'] == 200) {
-                console.log(body);
-                console.log(JSON.parse(body));
-                res.send(body['openid'])
+                res.send(JSON.parse(body)['openid'])
 
             } else {
                 res.send('fail')
             }
         });
-    }
+    };
+
+
 
 }
 

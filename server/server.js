@@ -15,12 +15,12 @@ var device = require('express-device');
 var ServerSer = require('./serverSer');
 var MiniSer = require('./mini/MiniSer');
 var serverSerData = require('./serverSerData');
-var PORT = serverSerData.port;
 
 /*对象数据实例化*/
 var app = express();
 var serverSer = new ServerSer();
 var miniSer = new MiniSer();
+var PORT = serverSerData.port;
 
 //设置http请求接收数据配置和最大限额等
 app.use(device.capture());
@@ -35,13 +35,6 @@ app.use(bodyParser.urlencoded({limit: serverSerData.httpDataLimit, extended: tru
 //     serHelper.setCrossOrigin(req, res, next);
 // });
 
-miniSer.getMiniUserOpenId();
-
-app.get('/getMiniUserOpenId', function () {
-    //var url = 'https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code';
-
-});
-
 /**
  * 返回基础配置文件
  */
@@ -49,9 +42,36 @@ app.get('/targetSetting', function (req, res) {
     res.send(serverSerData.targetSetting)
 });
 
+/**
+ * 小程序获取用户openId数据
+ */
+app.get('/getMiniUserOpenId', function (req, res) {
+    miniSer.getMiniUserOpenId(req, res)
+});
+
+
+/**
+ * 用户上传资源文件数据
+ */
+var storage = multer.diskStorage({
+    //指定保存的文件夹
+    destination: function (req, file, cb) {
+        cb(null, serverSerData.resourcePath)
+    },
+    //指定保存的文件名
+    filename: function (req, file, cb) {
+        cb(null, req.body['fileName'])
+    }
+});
+var upload = multer({storage: storage});
+app.post('/uploadResource', upload.single('file'), function (req, res) {
+    res.send(true);
+});
+
 
 //资源文件获取
-app.use("/", express.static(serverSerData.basePath + "/project"));
+app.use("/resource", express.static(serverSerData.resourcePath));
+app.use("/", express.static(serverSerData.projectPath));
 app.listen(PORT);
 console.log("Server is running at port: " + PORT + " , and at environment: " + global.env);
 
