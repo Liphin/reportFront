@@ -16,8 +16,8 @@ settingData['resourcePath'] = settingData['basePath'] + "/resource";
 
 //应用配置
 var appConfig = {
-    appid: 'wxf4676e44a9519526',
-    secret: '1a3f4856b36d6e96e83cb43862b39287',
+    appid: 'wx8c0feed4f5d17636',
+    secret: 'da618efecb2ca815dd7779d2b93e43fc',
 };
 
 
