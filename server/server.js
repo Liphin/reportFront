@@ -6,7 +6,9 @@ global.env = process.env.TARGET_ENV;
 if (env == undefined || env == '' || env == null) {
     global.env = 'dev';
 }
+var fs = require('fs');
 var http = require('http');
+var https = require('https');
 var request = require('request');
 var multer = require('multer');
 var express = require('express');
@@ -72,6 +74,14 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
 //资源文件获取
 app.use("/resource", express.static(serverSerData.resourcePath));
 app.use("/", express.static(serverSerData.projectPath));
-app.listen(PORT);
+
+
+//----------------------------- 开启http和https服务 ----------------------------------------
+var privateKey = fs.readFileSync(serverSerData.targetSetting.serverConfig.key);
+var certificate = fs.readFileSync(serverSerData.targetSetting.serverConfig.cert);
+var credentials = {key: privateKey, cert: certificate};
+https.createServer(credentials, app).listen(PORT); //开启http设置s配置
+//http.createServer(app).listen(PORT); //开启http设置配置
+
 console.log("Server is running at port: " + PORT + " , and at environment: " + global.env);
 

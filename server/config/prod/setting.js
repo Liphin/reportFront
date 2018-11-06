@@ -3,7 +3,6 @@
  */
 var settingData = {
     basePath: "/root/report/front", //基础路径
-    projectPath: "/root/report/front/output", //基础路径
     domainName: "http://report.liphin.com", //域名设置
     isProd: false, //是否为生产环境
     frontPort: 3032, //前端port
@@ -12,6 +11,13 @@ var settingData = {
 //其他配置
 settingData['projectPath'] = settingData['basePath'] + "/output";
 settingData['resourcePath'] = settingData['basePath'] + "/resource";
+
+
+//http和https服务开启
+var serverConfig = {
+    key: '/root/ca/https/node/cert-1541484604580_liphin.com.key',
+    cert:'/root/ca/https/node/cert-1541484604580_liphin.com.crt',
+};
 
 
 //应用配置
@@ -23,5 +29,6 @@ var appConfig = {
 
 module.exports = {
     settingData: settingData,
-    appConfig: appConfig
+    appConfig: appConfig,
+    serverConfig:serverConfig,
 };

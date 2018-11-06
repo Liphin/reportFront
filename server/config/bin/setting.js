@@ -13,6 +13,13 @@ var settingData = {
 settingData['projectPath'] = settingData['basePath'] + "/project";
 settingData['resourcePath'] = settingData['basePath'] + "/resource";
 
+
+//http和https服务开启
+var serverConfig = {
+    key: 'G:/SoftwareOutSourcing/report_prod/ca/Nginx/cert-1541484604580_liphin.com.key',
+    cert:'G:/SoftwareOutSourcing/report_prod/ca/Nginx/cert-1541484604580_liphin.com.crt',
+};
+
 //应用配置
 var appConfig = {
     appid: 'wx8c0feed4f5d17636',
@@ -22,4 +29,5 @@ var appConfig = {
 module.exports = {
     settingData: settingData,
     appConfig: appConfig,
+    serverConfig:serverConfig,
 };
