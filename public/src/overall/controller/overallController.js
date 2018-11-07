@@ -4,7 +4,7 @@
 var overallModule = angular.module('Angular');
 
 overallModule.controller('OverallCtrl', function ($http, $cookies, $rootScope, $location, $timeout, OverallDataSer,
-                                                  OverallSer, OverallGeneralSer) {
+                                                  OverallSer, OverallGeneralSer, $window) {
     /******************************个人信息标签显示和隐藏设置**************************************/
 
     /*初始化必要变量*/
@@ -36,6 +36,6 @@ overallModule.controller('OverallCtrl', function ($http, $cookies, $rootScope, $
         $location.path(OverallDataSer.redirect['loginHome']);
 
         //刷新当前页面，所有数据重置
-        $window.location.reload();
+        //$window.location.reload();
     };
 });
