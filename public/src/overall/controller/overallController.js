@@ -36,6 +36,6 @@ overallModule.controller('OverallCtrl', function ($http, $cookies, $rootScope, $
         $location.path(OverallDataSer.redirect['loginHome']);
 
         //刷新当前页面，所有数据重置
-        //$window.location.reload();
+        $window.location.reload();
     };
 });
