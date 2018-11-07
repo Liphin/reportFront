@@ -80,7 +80,13 @@ app.use("/", express.static(serverSerData.projectPath + "/public"));
 var privateKey = fs.readFileSync(serverSerData.targetSetting.serverConfig.key);
 var certificate = fs.readFileSync(serverSerData.targetSetting.serverConfig.cert);
 var credentials = {key: privateKey, cert: certificate};
-https.createServer(credentials, app).listen(PORT); //开启http设置s配置
+
+//如果部署到生产环境则用https协议打开端口，否则直接使用http协议端口
+if(global.env=='prod'){
+    https.createServer(credentials, app).listen(PORT); //开启http设置s配置
+}else {
+    app.listen(PORT);
+}
 //http.createServer(app).listen(PORT); //开启http设置配置
 //app.listen(PORT);
 
