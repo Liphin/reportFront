@@ -26,6 +26,9 @@ head.load(
     //'vendor/others/md5.min.js',//md5加密
     'https://cdn.bootcss.com/blueimp-md5/2.5.0/js/md5.min.js',//md5加密
 
+    //js.cookie.min.js
+    '/assets/js/others/js.cookie.min.js',
+
 
     /*overall part Angular框架全局设置*/
     'src/overall/module/overallModule.js',
@@ -36,7 +39,24 @@ head.load(
     'src/overall/service/overallGeneralService.js',
     'src/overall/service/overallService.js',
     'src/overall/directive/overallDirective.js',
-    'src/overall/directive/overallUrlDirective.js'
+    'src/overall/directive/overallUrlDirective.js',
 
+
+    /*login 登录模块*/
+    'src/login/module/loginModule.js',
+    'src/login/controller/loginController.js',
+    'src/login/service/loginDataService.js',
+    'src/login/service/loginGeneralService.js',
+    'src/login/service/loginService.js',
+    'src/login/directive/loginDirective.js',
+    'src/login/directive/loginUrlDirective.js',
+
+
+    /*report 内容模块*/
+    'src/report/list/module.js',
+    'src/report/list/service.js',
+    'src/report/list/data.js',
+    'src/report/list/directive.js',
+    'src/report/list/controller.js'
 
 );

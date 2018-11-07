@@ -23,4 +23,19 @@ overallModule.controller('OverallCtrl', function ($http, $cookies, $rootScope, $
         OverallSer.preventEventTransport($event);
     };
 
+    /**
+     * 退出登录操作
+     */
+    $rootScope.signOut = function () {
+        //清空用户数据
+        OverallDataSer.overallData['loginStatus']=false;
+        $cookies.remove('loginStatus');
+
+        //跳转到登录页面
+        $location.search({});
+        $location.path(OverallDataSer.redirect['loginHome']);
+
+        //刷新当前页面，所有数据重置
+        $window.location.reload();
+    };
 });

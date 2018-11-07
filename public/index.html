@@ -1,13 +1,19 @@
 <!--<!DOCTYPE html>-->
 <html ng-app="Angular" ng-controller="OverallCtrl">
 <head>
-    <!--云端css加载-->
-    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" media="none" onload="if(media!='all')media='all'">
+    <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+    <link rel="shortcut icon" type="image/png" href="http://powergame.liphin.com:3030/favicon.png"/>
+    <link rel="stylesheet" href="assets/css/codemirror/codemirror.min.css" >
+    <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css" media="none" onload="if(media!='all')media='all'">
+    <link rel="stylesheet" href="assets/css/summernote/summernote.css" >
+    <link rel="stylesheet" href="assets/css/font-awesome/font-awesome.min.css" >
     <!--本地css-->
-    <link rel="stylesheet" href="/public/assets/css/overall/overall.css" media="none" onload="if(media!='all')media='all'">
+    <link rel="stylesheet" href="assets/css/overall/shadows.css" media="none" onload="if(media!='all')media='all'">
+    <link rel="stylesheet" href="assets/css/overall/overall.css" media="none" onload="if(media!='all')media='all'">
+    <link rel="stylesheet" href="assets/css/content/content.css" media="none" onload="if(media!='all')media='all'">
     <!--javascript 加载-->
-    <script src="vendor/boot/head.load.min.js"></script>
-    <script async src="vendor/boot/boot.js"></script>
+    <script src="assets/js/boot/head.load.min.js"></script>
+    <script async src="assets/js/boot/boot.js"></script>
 
     <!--头部-->
     <meta charset="UTF-8">
@@ -19,7 +25,7 @@
     <!--loading加载动画-->
     <div ng-if="loading" align="center" style="background: rgba(255,255,255,0.5);position: fixed;left: 0;right: 0;
             top: 0;bottom: 0; z-index:{{zIndexHelper['loading']}};text-align: center;">
-        <img src="/public/assets/img/load/loader1.gif" style="margin-top: 100px;">
+        <img src="assets/img/load/loader1.gif" style="margin-top: 100px;">
     </div>
     <!--获取数据动画-->
     <div ng-if="overallData['loadingData']" style="background: rgba(255,255,255,0.5);position: fixed;left: 0;right: 0; top: 0;bottom: 0;z-index:{{zIndexHelper['loading']}};text-align: center;">

@@ -3,7 +3,18 @@
  */
 var overallModule = angular.module('Angular');
 
-overallModule.factory('OverallGeneralSer', function (OverallDataSer, $timeout, $rootScope, $cookies, $location) {
+overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $timeout, $rootScope, $cookies, $location) {
+
+    /**
+     * 设置cookie三小时的生存时间
+     * @returns {Date}
+     */
+    var getNewCookiesExpireDate = function () {
+        var expireDate = new Date();
+        expireDate.setHours(expireDate.getHours() + 3, expireDate.getMinutes(), expireDate.getSeconds(), expireDate.getMilliseconds());
+        return expireDate;
+    };
+
 
     /**
      * 对数据进行判空处理
@@ -94,23 +105,73 @@ overallModule.factory('OverallGeneralSer', function (OverallDataSer, $timeout, $
 
 
     /**
-     * http 请求错误返回的处理
-     * @param errFunction
-     * @param errCode
-     * @param err
+     * http get获取资源数据
      */
-    var alertHttpRequestError = function (errFunction, errCode, err) {
-        //请求出错打印错误消息和弹出alert视窗提醒客户
-        console.error(errFunction, errCode, err);
-        alert("Sorry, service error please try again later.\n很抱歉，服务异常，请稍后重试");
+    var httpGetFiles = function (url, callback) {
+        //设置loading状态
+        OverallDataSer.overallData['loadingData'] = true;
+        $http({
+            method: 'GET',
+            url: url
+        }).then(function successCallback(response) {
+            if (response['status'] == 200) {
+                //返回正确操作后执行回调函数
+                callback(response['data'])
+
+            } else {
+                alert(OverallDataSer.overallData['requestDataErrorMsg'] + ",.");
+            }
+        }, function errorCallback(err) {
+            alert(OverallDataSer.overallData['requestDataErrorMsg'] + ".," + err);
+
+        }).finally(function () {
+            //重置loading状态
+            OverallDataSer.overallData['loadingData'] = false;
+        });
+    };
+
+
+    /**
+     * http post获取资源数据
+     */
+    var httpPostData = function (url, obj, callback) {
+        //设置loading状态
+        OverallDataSer.overallData['loadingData'] = true;
+
+        var fd = new FormData();
+        //动态装载数据
+        for (var i in obj) {
+            fd.append(i, obj[i]);
+        }
+        $http.post(url, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined},
+
+        }).success(function (response) {
+            if (response['status_code'] == 200) {
+                //返回正确操作后执行回调函数
+                callback(response['data']);
+
+            } else {
+                alert(OverallDataSer.overallData['requestDataErrorMsg'] + ".");
+            }
+        }).error(function (err) {
+            alert(OverallDataSer.overallData['requestDataErrorMsg'] + ",");
+
+        }).finally(function () {
+            //设置loading状态
+            OverallDataSer.overallData['loadingData'] = false;
+        });
     };
 
 
     return {
+        httpGetFiles:httpGetFiles,
+        httpPostData:httpPostData,
         getTimeStamp: getTimeStamp,
         sqlInjectFilter: sqlInjectFilter,
         checkDataNotEmpty: checkDataNotEmpty,
-        alertHttpRequestError: alertHttpRequestError,
-        setSubmitAnimateSuccess:setSubmitAnimateSuccess,
+        getNewCookiesExpireDate: getNewCookiesExpireDate,
+        setSubmitAnimateSuccess: setSubmitAnimateSuccess,
     }
 });

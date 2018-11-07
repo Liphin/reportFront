@@ -73,7 +73,7 @@ app.post('/uploadResource', upload.single('file'), function (req, res) {
 
 //资源文件获取
 app.use("/resource", express.static(serverSerData.resourcePath));
-app.use("/", express.static(serverSerData.projectPath));
+app.use("/", express.static(serverSerData.projectPath + "/public"));
 
 
 //----------------------------- 开启http和https服务 ----------------------------------------
@@ -82,6 +82,7 @@ var certificate = fs.readFileSync(serverSerData.targetSetting.serverConfig.cert)
 var credentials = {key: privateKey, cert: certificate};
 https.createServer(credentials, app).listen(PORT); //开启http设置s配置
 //http.createServer(app).listen(PORT); //开启http设置配置
+//app.listen(PORT);
 
 console.log("Server is running at port: " + PORT + " , and at environment: " + global.env);
 
