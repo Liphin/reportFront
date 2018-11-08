@@ -174,8 +174,8 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
      * 鼠标点击选择展示某目标页面的新闻列表数据
      */
     var searchReportList = function () {
-        // ReListDataSer.overallData['search']['startDate']= $("input[name=startDate]").val();
-        // ReListDataSer.overallData['search']['endDate']= $("input[name=endDate]").val();
+        // ReListDataSer.overallData['search']['startDate']= $("input[name='startDate']").val();
+        // ReListDataSer.overallData['search']['endDate']= $("input[name='endDate']").val();
         //alert(JSON.stringify(ReListDataSer.overallData['search']));
         if (ReListDataSer.overallData['search']['startDate'].length<=0||
             ReListDataSer.overallData['search']['endDate'].length<=0) {

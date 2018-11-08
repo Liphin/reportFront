@@ -26,9 +26,6 @@ head.load(
     //'vendor/others/md5.min.js',//md5加密
     'https://cdn.bootcss.com/blueimp-md5/2.5.0/js/md5.min.js',//md5加密
 
-    //日期
-    'http://viewcoder.beansonbar.cn/cdn/js/laydate_export.js',
-
     //js.cookie.min.js
     '/assets/js/others/js.cookie.min.js',
 
