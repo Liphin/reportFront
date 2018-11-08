@@ -25,6 +25,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
             'managerLogin': baseUrlData['backEndHttp'] + 'managerLogin', //管理员登录操作
             'getAllCompany': baseUrlData['backEndHttp'] + 'getAllCompany',
             'getRangeReport': baseUrlData['backEndHttp'] + 'getRangeReport',
+            'getRangeReport': baseUrlData['backEndHttp'] + 'searchReportList',
         },
         'frontEndHttp': {
             'getSqlKeyWord': baseUrlData['frontEndHttp'] + 'helper/sqlKeyWord.txt',

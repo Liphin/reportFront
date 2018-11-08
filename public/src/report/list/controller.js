@@ -35,4 +35,11 @@ app.controller('ReportListCtrl', function (ReListDataSer, ReListSer, OverallData
         ReListSer.showTargetNumReportList($index, num)
     };
 
+    /**
+     * 搜索特定条件的列表
+     */
+    relist.searchReportList=function () {
+        ReListSer.searchReportList()
+    };
+
 });

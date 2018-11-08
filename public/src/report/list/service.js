@@ -28,7 +28,7 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
         //http请求数据
         OverallGeneralSer.httpPostData(OverallDataSer.urlData['backEndHttp']['getRangeReport'], data, function (responseData) {
             var totalNum = responseData['totalNum'];
-            var reportList = responseData['reportList'];
+            var reportList= responseData['reportList'];
 
             //设置全部新闻条目数目
             ReListDataSer.overallData['totalNum'] = totalNum;
@@ -39,7 +39,7 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
             var reportListSortedData = reportList.sort(sortStickNum);
             //循环填充新闻list数据
             for (var i in reportListSortedData) {
-                ReListDataSer.reportList.push(reportListSortedData[i]);
+                ReListDataSer.reportList['list'].push(reportListSortedData[i]);
             }
             //装填分页展示信息
             loadPageInfo();
@@ -169,12 +169,56 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
             (pageNum - 1) * ReListDataSer.overallData['screenNum'];
     };
 
+    /**
+     * 鼠标点击选择展示某目标页面的新闻列表数据
+     */
+    var searchReportList = function () {
+        ReListDataSer.overallData['search']['startDate']= $("input[name='startDate']").val();
+        ReListDataSer.overallData['search']['endDate']= $("input[name='endDate']").val();
+
+        if (ReListDataSer.overallData['search']['startDate'].length<=0||
+            ReListDataSer.overallData['search']['startDate'].length<=0) {
+            alert("请输入指定搜素日期");
+        }
+        else {
+            //提交表单数据
+            var url = OverallDataSer.searchReportList;
+            var sendData = {
+                'startDate': ReListDataSer.overallData['search']['startDate'],
+                'endDate': ReListDataSer.overallData['search']['endDate'],
+                'type' : ReListDataSer.overallData['search']['type'],
+            };
+
+            //获取搜索的内容
+            OverallGeneralSer.httpPostData(url, sendData, function (data) {
+                //清空当前数据集
+                ReListDataSer.reportList['list'].length = 0;
+
+                //重置数据顺序：1、根据置顶标签排在前面，2、置顶的数据中根据置顶时间戳进行排序
+                var friendCircleListSortedData = data.sort(sortStickNum);
+                //循环填充新闻list数据
+                for (var i in friendCircleListSortedData) {
+                    //装载朋友圈list数据
+                    ReListDataSer.reportList['list'].push(friendCircleListSortedData[i]);
+                }
+                //设置total_num为0，取消分页
+                ReListDataSer.overallData['listShow']['totalNum'] = 0;
+                //获取新数据后页面滚动到列表顶部
+                angular.element("60newsList").scrollTop = 0;
+            })
+        }
+
+
+
+    }
+
 
     return {
         dataInit:dataInit,
         getRangeReportInfo: getRangeReportInfo,
         getBatchRangeReportInfo: getBatchRangeReportInfo,
-        showTargetNumReportList:showTargetNumReportList
+        showTargetNumReportList:showTargetNumReportList,
+        searchReportList: searchReportList,
     }
 
 });
