@@ -164,6 +164,36 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
         });
     };
 
+    /**
+     * 组装生成新闻时间
+     * @param createTime
+     * @returns {string}
+     */
+    // var generateSearchTime = function (dateTime) {
+    //     var today = new Date();
+    //     today.setHours(0);
+    //     today.setMinutes(0);
+    //     today.setSeconds(0);
+    //
+    //     var replaceTime = dateTime.replace(/\-/g, "/");
+    //     var targetTime = new Date(replaceTime);
+    //     if (today - targetTime < 0) {
+    //         //当天发的新闻
+    //         var Hours=targetTime.getHours();
+    //         var Minutes=targetTime.getMinutes();
+    //
+    //         if (Minutes.length<2) {
+    //             Minutes="0"+Minutes;
+    //         }
+    //
+    //         return Hours + ":" + Minutes;
+    //
+    //     } else {
+    //         //之前发的新闻
+    //         return targetTime.getMonth() + "月" + targetTime.getDate() + "日";
+    //     }
+    // };
+
 
     return {
         httpGetFiles:httpGetFiles,

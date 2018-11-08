@@ -18,12 +18,13 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
     var getRangeReportInfo = function () {
         //发送请求获取指定范围和数目的新闻数据
         var data = {};
-        if (ReListDataSer.reportList.length <= 0) {
+        if (ReListDataSer.reportList['list'].length <= 0) {
             data['create_time'] = ReListDataSer.MAX_CREATE_TIME;
 
         } else {
             data['create_time'] = ReListDataSer.reportList[ReListDataSer.reportList.length - 1]['create_time'];
         }
+        //alert(JSON.stringify(data));
 
         //http请求数据
         OverallGeneralSer.httpPostData(OverallDataSer.urlData['backEndHttp']['getRangeReport'], data, function (responseData) {
@@ -177,12 +178,15 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
         ReListDataSer.overallData['search']['endDate']= $("input[name='endDate']").val();
 
         if (ReListDataSer.overallData['search']['startDate'].length<=0||
-            ReListDataSer.overallData['search']['startDate'].length<=0) {
+            ReListDataSer.overallData['search']['endDate'].length<=0) {
             alert("请输入指定搜素日期");
+        }
+        else if (ReListDataSer.overallData['search']['startDate']>ReListDataSer.overallData['search']['endDate']) {
+            alert("结束日期小于开始日期，请重新输入");
         }
         else {
             //提交表单数据
-            var url = OverallDataSer.searchReportList;
+            var url = OverallDataSer.urlData['backEndHttp']['searchReportList'];
             var sendData = {
                 'startDate': ReListDataSer.overallData['search']['startDate'],
                 'endDate': ReListDataSer.overallData['search']['endDate'],
