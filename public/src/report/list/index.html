@@ -40,9 +40,9 @@
         <button ng-click="" id="40" name="Btn_40" style="position: absolute;top: 100px; height: 34px; z-index:40; left: 238px; width: 96px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: #d85a54; border-radius: 5px 5px 5px 5px; background:#d85a54; color: rgba(255,255,255,1.0); text-align: center; ">删除</button>
 
         <!--类型-->
-        <div style="position: absolute;top: 100px; height: 34px; z-index:45; left: 388px; width: 30px; padding: 6px 12px 6px 12px; color: rgba(255,0,255,1.0); text-align: center; ">类型</div>
+        <div style="position: absolute;top: 100px; height: 34px; z-index:45; left: 358px; width: 60px; padding: 6px 12px 6px 12px; color: rgba(255,0,255,1.0); text-align: center; ">类型</div>
         <!-- 下拉框 -->
-        <select class="form-control" id="42" name="Select_42" style="padding-top: 4px; position: absolute;top: 100px; height: 32px; z-index:92; left: 418px; width: 183px; background:rgba(255,255,255,1); color: rgba(0,0,0,1.0); border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(100,100,100,0.4); border-radius: 5px 5px 5px 5px; "
+        <select class="form-control" id="42" name="Select_42" style="padding-top: 4px; position: absolute;top: 100px; height: 32px; z-index:92; left: 408px; width: 183px; background:rgba(255,255,255,1); color: rgba(0,0,0,1.0); border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(100,100,100,0.4); border-radius: 5px 5px 5px 5px; "
                 ng-model="relist.overallData['search']['type']" convert-to-number>
             <option ng-repeat="(key, value) in relist.overallData['mapData']['newsType']"  value="{{key}}">{{value}}</option>
         </select>
@@ -50,18 +50,21 @@
         <!--选择日期-->
         <!--日期css加载-->
 
-        <div style="position: absolute;top: 110px; height: 34px; z-index:45; left: 638px; width: 96px; padding: 6px 12px 6px 12px; color: rgba(255,0,255,1.0); text-align: center; ">指定日期</div>
-        <!--<div id="calend" ng-model="relist.overallData['search']['startDate']" class="calend" style="position: absolute;top: 100px; height: 34px; z-index:43; left: 738px; width: 80px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: #d85a54; border-radius: 5px 5px 5px 5px; background:#d85a54; color: rgba(255,255,255,1.0); text-align: center; ">请选择日期</div>-->
-        <div align="center" style="position: relative; display: inline-block;width:1316px;height:1080px;">
-            <!-- 日期选择器 -->
-            <div id="5" name="startDate" style="position: absolute;top: 100px; height: 36px; z-index:43; left: 738px; width: 176px; " class="viewcoder-datepicker"></div>
-        </div>
-        <div style="position: absolute;top: 110px; height: 34px; z-index:45; left: 918px; width: 15px; padding: 6px 12px 6px 12px; color: rgba(255,0,255,1.0); text-align: center; ">至</div>
-        <!--<div id="calend1" ng-model="relist.overallData['search']['endDate']" class="calend" style="position: absolute;top: 100px; height: 34px; z-index:45; left: 868px; width: 80px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: #d85a54; border-radius: 5px 5px 5px 5px; background:#d85a54; color: rgba(255,255,255,1.0); text-align: center; ">请选择日期</div>-->
-        <div align="center" style="position: relative; display: inline-block;width:1316px;height:1080px;">
-            <!-- 日期选择器 -->
-            <div id="6" name="endDate" style="position: absolute;top: 100px; height: 36px; z-index:43; left: 938px; width: 176px; " class="viewcoder-datepicker"></div>
-        </div>
+        <div style="position: absolute;top: 100px; height: 34px; z-index:45; left: 608px; width: 96px; padding: 6px 12px 6px 12px; color: rgba(255,0,255,1.0); text-align: center; ">指定日期</div>
+        <!--<div id="calend" ng-model="relist.overallData['search']['startDate']" class="calend" style="position: absolute;top: 100px; height: 34px; z-index:43; left: 708px; width: 80px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: #d85a54; border-radius: 5px 5px 5px 5px; background:#d85a54; color: rgba(255,255,255,1.0); text-align: center; ">请选择日期</div>-->
+        <!--<div align="center" style="position: relative; display: inline-block;width:1316px;height:1080px;">-->
+            <!--&lt;!&ndash; 日期选择器 &ndash;&gt;-->
+            <!--<div id="5" name="startDate" style="position: absolute;top: 100px; height: 36px; z-index:43; left: 708px; width: 176px; " class="viewcoder-datepicker"></div>-->
+        <!--</div>-->
+        <div style="position: absolute;top: 100px; height: 34px; z-index:45; left: 888px; width: 15px; padding: 6px 12px 6px 12px; color: rgba(255,0,255,1.0); text-align: center; ">至</div>
+        <!--<div id="calend1" ng-model="relist.overallData['search']['endDate']" class="calend" style="position: absolute;top: 100px; height: 34px; z-index:45; left: 928px; width: 80px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: #d85a54; border-radius: 5px 5px 5px 5px; background:#d85a54; color: rgba(255,255,255,1.0); text-align: center; ">请选择日期</div>-->
+        <!--<div align="center" style="position: relative; display: inline-block;width:1316px;height:1080px;">-->
+            <!--&lt;!&ndash; 日期选择器 &ndash;&gt;-->
+            <!--<div id="6" name="endDate" style="position: absolute;top: 100px; height: 36px; z-index:43; left: 928px; width: 176px; " class="viewcoder-datepicker"></div>-->
+        <!--</div>-->
+
+        <input type="text" ng-keydown="" ng-model="relist.overallData['search']['startDate']" class="form-control" placeholder="请选择日期" id="47" name="Input_47" style="position: absolute;top: 100px; height: 34px; z-index:47; left: 708px; width: 176px; padding: 6px 22px 6px 22px; background:rgba(255,255,255,1); color: rgba(0,0,0,1.0); border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(100,100,100,0.4); border-radius: 20px 20px 20px 20px; ">
+        <input type="text" ng-keydown="" ng-model="relist.overallData['search']['endDate']" class="form-control" placeholder="请选择日期" id="47" name="Input_47" style="position: absolute;top: 100px; height: 34px; z-index:47; left: 928px; width: 176px; padding: 6px 22px 6px 22px; background:rgba(255,255,255,1); color: rgba(0,0,0,1.0); border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(100,100,100,0.4); border-radius: 20px 20px 20px 20px; ">
 
         <!-- 按钮 -->
         <!--<button ng-click="" id="43" name="Btn_43" style="position: absolute;top: 100px; height: 34px; z-index:43; left: 369px; width: 96px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: #ccb7b6; border-radius: 5px 5px 5px 5px; background:rgba(255,255,255,1); color: rgba(83,41,125,1); text-align: center; ">删除</button>-->

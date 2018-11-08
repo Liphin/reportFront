@@ -174,22 +174,23 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
      * 鼠标点击选择展示某目标页面的新闻列表数据
      */
     var searchReportList = function () {
-        ReListDataSer.overallData['search']['startDate']= $("input[name='startDate']").val();
-        ReListDataSer.overallData['search']['endDate']= $("input[name='endDate']").val();
-
+        // ReListDataSer.overallData['search']['startDate']= $("input[name=startDate]").val();
+        // ReListDataSer.overallData['search']['endDate']= $("input[name=endDate]").val();
+        alert(JSON.stringify(ReListDataSer.overallData['search']));
         if (ReListDataSer.overallData['search']['startDate'].length<=0||
             ReListDataSer.overallData['search']['endDate'].length<=0) {
             alert("请输入指定搜素日期");
         }
-        else if (ReListDataSer.overallData['search']['startDate']>ReListDataSer.overallData['search']['endDate']) {
+        else if (ReListDataSer.overallData['search']['startDate']>
+                 ReListDataSer.overallData['search']['endDate']) {
             alert("结束日期小于开始日期，请重新输入");
         }
         else {
             //提交表单数据
             var url = OverallDataSer.urlData['backEndHttp']['searchReportList'];
             var sendData = {
-                'startDate': ReListDataSer.overallData['search']['startDate'],
-                'endDate': ReListDataSer.overallData['search']['endDate'],
+                'startDate': OverallGeneralSer.generateSearchTime(ReListDataSer.overallData['search']['startDate']),
+                'endDate': OverallGeneralSer.generateSearchTime(ReListDataSer.overallData['search']['endDate']),
                 'type' : ReListDataSer.overallData['search']['type'],
             };
 
