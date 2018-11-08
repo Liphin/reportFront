@@ -176,7 +176,7 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
     var searchReportList = function () {
         // ReListDataSer.overallData['search']['startDate']= $("input[name=startDate]").val();
         // ReListDataSer.overallData['search']['endDate']= $("input[name=endDate]").val();
-        alert(JSON.stringify(ReListDataSer.overallData['search']));
+        //alert(JSON.stringify(ReListDataSer.overallData['search']));
         if (ReListDataSer.overallData['search']['startDate'].length<=0||
             ReListDataSer.overallData['search']['endDate'].length<=0) {
             alert("请输入指定搜素日期");
@@ -188,9 +188,13 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
         else {
             //提交表单数据
             var url = OverallDataSer.urlData['backEndHttp']['searchReportList'];
+            var startDate = OverallGeneralSer.generateSearchTime(ReListDataSer.overallData['search']['startDate']);
+            var endDate = OverallGeneralSer.generateSearchTime(ReListDataSer.overallData['search']['endDate']);
+            //alert(JSON.stringify(startDate));
+            //alert(JSON.stringify(endDate));
             var sendData = {
-                'startDate': OverallGeneralSer.generateSearchTime(ReListDataSer.overallData['search']['startDate']),
-                'endDate': OverallGeneralSer.generateSearchTime(ReListDataSer.overallData['search']['endDate']),
+                'startDate': startDate,
+                'endDate': endDate,
                 'type' : ReListDataSer.overallData['search']['type'],
             };
 
@@ -202,6 +206,7 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
                 //重置数据顺序：1、根据置顶标签排在前面，2、置顶的数据中根据置顶时间戳进行排序
                 var friendCircleListSortedData = data.sort(sortStickNum);
                 //循环填充新闻list数据
+                //alert("6666");
                 for (var i in friendCircleListSortedData) {
                     //装载朋友圈list数据
                     ReListDataSer.reportList['list'].push(friendCircleListSortedData[i]);
