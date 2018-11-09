@@ -57,6 +57,7 @@ app.factory('ReListDataSer', function () {
     //内部页面跳转展示
     var navigation = {
         'report': {
+            'reportList': false,
             'viewReport': false,
         },
     };

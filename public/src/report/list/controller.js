@@ -19,8 +19,8 @@ app.controller('ReportListCtrl', function (ReListDataSer, ReListSer, OverallData
     var relist = this;
     relist.overallData = ReListDataSer.overallData;
     relist.reportList = ReListDataSer.reportList;
-    relist.reportList = ReListDataSer.navigation;
-    ReListSer.dataInit();
+    relist.navigation = ReListDataSer.navigation;
+    ReportSer.dataInit();
 
     /**
      * 展示目标诉讼数据

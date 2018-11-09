@@ -56,6 +56,8 @@ head.load(
     'src/report/list/module.js',
     'src/report/list/service.js',
     'src/report/list/data.js',
+    'src/report/list/sub/reportList/reportListService.js',
+    'src/report/list/sub/viewReport/viewReportService.js',
     'src/report/list/directive.js',
     'src/report/list/controller.js'
 

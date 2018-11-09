@@ -14,6 +14,16 @@ overallModule.directive('signOut', ['$document', function ($document) {
 }]);
 
 /**
+ * 数据列表
+ */
+overallModule.directive('reportList', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/report/list/sub/reportList/reportList.html'
+    };
+}]);
+
+/**
  * 详情页面
  */
 overallModule.directive('viewReport', ['$document', function ($document) {
