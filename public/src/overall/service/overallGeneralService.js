@@ -175,6 +175,18 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
         return searchTime;
     };
 
+    /**
+     * http 请求错误返回的处理
+     * @param errFunction
+     * @param errCode
+     * @param err
+     */
+    var alertHttpRequestError = function (errFunction, errCode, err) {
+        //请求出错打印错误消息和弹出alert视窗提醒客户
+        console.error(errFunction, errCode, err);
+        alert("Sorry, service error please try again later.\n很抱歉，服务异常，请稍后重试");
+    };
+
 
     return {
         httpGetFiles:httpGetFiles,
@@ -185,5 +197,6 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
         getNewCookiesExpireDate: getNewCookiesExpireDate,
         setSubmitAnimateSuccess: setSubmitAnimateSuccess,
         generateSearchTime: generateSearchTime,
+        alertHttpRequestError: alertHttpRequestError,
     }
 });

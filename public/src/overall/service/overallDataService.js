@@ -26,9 +26,13 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
             'getAllCompany': baseUrlData['backEndHttp'] + 'getAllCompany',
             'getRangeReport': baseUrlData['backEndHttp'] + 'getRangeReport',
             'searchReportList': baseUrlData['backEndHttp'] + 'searchReportList',
+            'deleteReport': baseUrlData['backEndHttp'] + 'deleteReport',
+            'deleteBranchReport': baseUrlData['backEndHttp'] + 'deleteBranchReport',
+            'getReportImgAndVoice': baseUrlData['backEndHttp'] + 'getReportImgAndVoice',
         },
         'frontEndHttp': {
             'getSqlKeyWord': baseUrlData['frontEndHttp'] + 'helper/sqlKeyWord.txt',
+            'getReportResource': baseUrlData['frontEndHttp'] + 'resource/',
         }
     };
 

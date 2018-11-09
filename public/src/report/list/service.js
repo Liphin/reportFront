@@ -3,13 +3,25 @@
  */
 var app = angular.module('Angular.relist');
 
-app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, OverallGeneralSer,OverallDataSer) {
+app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, OverallGeneralSer,OverallDataSer,ViewReportSer) {
+
+
 
     /**
      * 页面数据初始化
      */
     var dataInit= function () {
-        getRangeReportInfo();
+        var targetSubPage = $location.search()['subPage'];
+        alert(JSON.stringify(targetSubPage));
+        if (targetSubPage=="list") {
+            getRangeReportInfo();
+        }
+        else {
+            if(targetSubPage=="viewReport") {
+                ReListDataSer.navigation[targetSubPage] = true;
+            }
+        }
+
     };
 
     /**
@@ -217,10 +229,138 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
                 angular.element("60newsList").scrollTop = 0;
             })
         }
-
-
-
     }
+
+    /**
+     * 新闻操作
+     * @param optType
+     * @param newsId
+     * @param index
+     */
+    var ReListOpt = function (optType, reportId, index) {
+        //关闭编辑操作菜单
+        ReListDataSer.reportList['list'][index]['menu'] = false;
+        //根据不同操作类型相应操作
+        switch (optType) {
+            case 'view': {
+                viewReport(index);
+                break;
+            }
+            case 'delete': {
+                deleteReport(reportId, index);
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+    };
+
+    /**
+     * 删除指定新闻数据
+     */
+    var deleteReport = function (reportId, index) {
+        var fd = new FormData();
+        var url = OverallDataSer.urlData['backEndHttp']['deleteReport'];
+        fd.append('timestamp', ReListDataSer.reportList['list'][index]['timestamp']);
+
+        //提交表单数据
+        $http.post(url, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined},
+
+        }).success(function (response) {
+            if (response['status_code'] == 200) {
+                //重新清空列表并获取数据操作
+                ReListDataSer.reportList['list'][index].length = 0;
+                ReListDataSer.overallData['pagination']['loadedMaxPageNum'] = 0;
+                getRangeReportInfo();
+
+            } else {
+                OverallGeneralSer.alertHttpRequestError("deleteReport", response['exception_code'], response['exception']);
+            }
+        }).error(function (err) {
+            OverallGeneralSer.alertHttpRequestError("deleteReport", 600, err)
+        });
+    };
+
+    /**
+     * 查看详情
+     */
+    var viewReport = function (index) {
+        var fd = new FormData();
+        var url = OverallDataSer.urlData['backEndHttp']['getReportImgAndVoice'];
+        var resourceUrl = OverallDataSer.urlData['frontEndHttp']['getDynamicResource'];
+        fd.append('timestamp', ReListDataSer.reportList['list'][index]['timestamp']);
+
+        //http请求数据
+        OverallGeneralSer.httpPostData(url, fd, function (responseData) {
+            ReListDataSer.reportList['editData']['editIndex'] = index;
+            ReListDataSer.reportList['editData']['timestamp'] = ReListDataSer.reportList['list'][index]['timestamp'];
+            ReListDataSer.reportList['editData']['data']['name'] = ReListDataSer.reportList['list'][index]['name'];
+            ReListDataSer.reportList['editData']['data']['contact'] = "     "+ReListDataSer.reportList['list'][index]['contact'];
+            ReListDataSer.reportList['editData']['data']['create_time'] = ReListDataSer.reportList['list'][index]['create_time'];
+            ReListDataSer.reportList['editData']['data']['content'] = ReListDataSer.reportList['list'][index]['content'];
+
+            var resourceList= responseData['resource'];
+            for (var i in resourceList) {
+                if (resourceList[i]['type']==1) {
+                    ReListDataSer.reportList['editData']['data']['resourceImg'].push({
+                        'url': resourceUrl + resourceList[i]['filename'].trim(),
+                        'name': resourceList[i]['filename'].trim()
+                    });
+                }
+                else if (resourceList[i]['type']==2) {
+                    ReListDataSer.reportList['editData']['data']['resourceVoice'].push({
+                        'url': resourceUrl + resourceList[i]['filename'].trim(),
+                        'name': resourceList[i]['filename'].trim()
+                    });
+                }
+            }
+            alert(JSON.stringify(ReListDataSer.reportList['editData']['data']));
+
+        });
+
+        $location.search({'subPage': 'viewReport'});
+    };
+
+
+
+    /**
+     * 批量删除特定新闻数据
+     */
+    var deleteBatchReport = function () {
+        //装载需要删除的新闻列表数据
+        var toDeleteIdArrays = [];
+        for (var i in  ReListDataSer.reportList['list']) {
+            if (ReListDataSer.reportList['list'][i]['toDelete']) {
+                toDeleteIdArrays.push({
+                    'timestamp': ReListDataSer.reportList['list'][i]['timestamp'],
+                })
+            }
+        }
+
+        var fd = new FormData();
+        fd.append('deleteList', JSON.stringify(toDeleteIdArrays));
+        //提交表单数据
+        $http.post(OverallDataSer.urlData['backEndHttp']['deleteBranchReport'], fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined},
+
+        }).success(function (response) {
+            if (response['status_code'] == 200) {
+                //重新清空列表并获取数据操作
+                ReListDataSer.reportList['list'].length = 0;
+                ReListDataSer.overallData['pagination']['loadedMaxPageNum'] = 0;
+                getRangeReportInfo();
+
+            } else {
+                OverallGeneralSer.alertHttpRequestError("deleteBranchReport", response['exception_code'], response['exception']);
+            }
+        }).error(function (err) {
+            OverallGeneralSer.alertHttpRequestError("deleteBranchReport", 600, err)
+        });
+    };
 
 
     return {
@@ -229,6 +369,8 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
         getBatchRangeReportInfo: getBatchRangeReportInfo,
         showTargetNumReportList:showTargetNumReportList,
         searchReportList: searchReportList,
+        ReListOpt: ReListOpt,
+        deleteBatchReport: deleteBatchReport,
     }
 
 });

@@ -13,6 +13,16 @@ overallModule.directive('signOut', ['$document', function ($document) {
     };
 }]);
 
+/**
+ * 详情页面
+ */
+overallModule.directive('viewReport', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/report/list/sub/viewReport/viewReport.html'
+    };
+}]);
+
 
 
 
