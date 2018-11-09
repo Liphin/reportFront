@@ -182,8 +182,8 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
         else {
             //提交表单数据
             var url = OverallDataSer.urlData['backEndHttp']['searchReportList'];
-            var startDate = OverallGeneralSer.generateSearchTime(ReListDataSer.overallData['search']['startDate']);
-            var endDate = OverallGeneralSer.generateSearchTime(ReListDataSer.overallData['search']['endDate']);
+            var startDate = OverallGeneralSer.generateSearchTime(ReListDataSer.overallData['search']['startDate'],1);
+            var endDate = OverallGeneralSer.generateSearchTime(ReListDataSer.overallData['search']['endDate'],2);
             //alert(JSON.stringify(startDate));
             //alert(JSON.stringify(endDate));
             var sendData = {

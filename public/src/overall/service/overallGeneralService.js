@@ -169,8 +169,13 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
      * @param createTime
      * @returns {string}
      */
-    var generateSearchTime = function (dateTime) {
-        var searchTime=dateTime+" 00:00:00";
+    var generateSearchTime = function (dateTime,optType) {
+        if (optType==1) {
+            var searchTime=dateTime+" 00:00:00";
+        }
+        else if (optType==2) {
+            var searchTime=dateTime+" 23:59:59";
+        }
 
         return searchTime;
     };
