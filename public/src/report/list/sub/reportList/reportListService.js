@@ -254,9 +254,11 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
         }).success(function (response) {
             if (response['status_code'] == 200) {
                 //重新清空列表并获取数据操作
-                ReListDataSer.reportList['list'][index].length = 0;
-                ReListDataSer.overallData['pagination']['loadedMaxPageNum'] = 0;
-                getRangeReportInfo();
+                // ReListDataSer.reportList['list'][index].length = 0;
+                // ReListDataSer.overallData['pagination']['loadedMaxPageNum'] = 0;
+                // getRangeReportInfo();
+                //刷新当前页面，所有数据重置
+                $window.location.reload();
 
             } else {
                 OverallGeneralSer.alertHttpRequestError("deleteReport", response['exception_code'], response['exception']);
@@ -335,9 +337,11 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
         }).success(function (response) {
             if (response['status_code'] == 200) {
                 //重新清空列表并获取数据操作
-                ReListDataSer.reportList['list'].length = 0;
-                ReListDataSer.overallData['pagination']['loadedMaxPageNum'] = 0;
-                getRangeReportInfo();
+                // ReListDataSer.reportList['list'].length = 0;
+                // ReListDataSer.overallData['pagination']['loadedMaxPageNum'] = 0;
+                // getRangeReportInfo();
+                //刷新当前页面，所有数据重置
+                $window.location.reload();
 
             } else {
                 OverallGeneralSer.alertHttpRequestError("deleteBranchReport", response['exception_code'], response['exception']);
