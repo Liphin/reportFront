@@ -270,19 +270,22 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
      * 查看详情
      */
     var viewReport = function (index) {
-        var fd = new FormData();
+        var sendData = {
+            'timestamp': ReListDataSer.reportList['list'][index]['timestamp'],
+        };
         var url = OverallDataSer.urlData['backEndHttp']['getReportImgAndVoice'];
         var resourceUrl = OverallDataSer.urlData['frontEndHttp']['getDynamicResource'];
-        fd.append('timestamp', ReListDataSer.reportList['list'][index]['timestamp']);
+        alert(JSON.stringify(sendData));
 
         //http请求数据
-        OverallGeneralSer.httpPostData(url, fd, function (responseData) {
+        OverallGeneralSer.httpPostData(url, sendData, function (responseData) {
             ReListDataSer.reportList['editData']['editIndex'] = index;
             ReListDataSer.reportList['editData']['timestamp'] = ReListDataSer.reportList['list'][index]['timestamp'];
             ReListDataSer.reportList['editData']['data']['name'] = ReListDataSer.reportList['list'][index]['name'];
             ReListDataSer.reportList['editData']['data']['contact'] = "     "+ReListDataSer.reportList['list'][index]['contact'];
             ReListDataSer.reportList['editData']['data']['create_time'] = ReListDataSer.reportList['list'][index]['create_time'];
             ReListDataSer.reportList['editData']['data']['content'] = ReListDataSer.reportList['list'][index]['content'];
+            alert(JSON.stringify(responseData));
 
             var resourceList= responseData['resource'];
             for (var i in resourceList) {
