@@ -302,7 +302,8 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
                     });
                 }
             }
-            alert(JSON.stringify(ReListDataSer.reportList['editData']['data']));
+            alert(JSON.stringify(ReListDataSer.reportList['editData']['data']['resourceImg']));
+            alert(JSON.stringify(ReListDataSer.reportList['editData']['data']['resourceVoice']));
 
         });
 
