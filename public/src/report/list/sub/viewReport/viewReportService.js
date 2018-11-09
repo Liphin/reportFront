@@ -14,7 +14,7 @@ app.factory('ViewReportSer', function ($http, $window, $timeout, $location, ReLi
             index = ReListDataSer.reportList['editData']['editIndex']+1;
         }
 
-        if(optType==0&&ReListDataSer.reportList['list'][index]['timestamp'].length<=0) {
+        if(optType==0&&index<0) {
             alert("已是第一条记录，请查看下一条");
         }
         else if(optType==1&&ReListDataSer.reportList['list'][index]['timestamp'].length<=0) {

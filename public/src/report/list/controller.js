@@ -3,7 +3,7 @@
  */
 var app = angular.module('Angular.relist');
 
-app.controller('ReportListCtrl', function (ReListDataSer, ReListSer, OverallDataSer, $cookies, $location, OverallGeneralSer) {
+app.controller('ReportListCtrl', function (ReListDataSer, ReportSer, ReListSer, OverallDataSer, $cookies, $location, OverallGeneralSer,ViewReportSer) {
 
     if(!OverallDataSer.overallData['loginStatus']&&$cookies.get('loginStatus')!='success'){
         $location.path(OverallDataSer.redirect['loginHome']);
@@ -74,5 +74,6 @@ app.controller('ReportListCtrl', function (ReListDataSer, ReListSer, OverallData
     relist.returnBackList = function () {
         ViewReportSer.returnBackList();
     };
+
 
 });

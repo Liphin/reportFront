@@ -3,7 +3,7 @@
  */
 var app = angular.module('Angular.relist');
 
-app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, OverallGeneralSer,OverallDataSer,ViewReportSer) {
+app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, OverallGeneralSer,OverallDataSer) {
 
 
     /**

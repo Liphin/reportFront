@@ -3,7 +3,7 @@
  */
 var app = angular.module('Angular.relist');
 
-app.factory('ReportSer', function ($http, $window, $location, ReListDataSer, OverallGeneralSer,) {
+app.factory('ReportSer', function ($http, $window, $location, ReListDataSer, OverallGeneralSer,ReListSer) {
 
 
 
@@ -12,8 +12,8 @@ app.factory('ReportSer', function ($http, $window, $location, ReListDataSer, Ove
      */
     var dataInit= function () {
         var targetSubPage = $location.search()['subPage'];
-        alert(JSON.stringify(targetSubPage));
-        if (OverallGeneralSer.checkDataNotEmpty(targetSubPage)) {
+        //alert(JSON.stringify(targetSubPage));
+        if (!(OverallGeneralSer.checkDataNotEmpty(targetSubPage))) {
             $location.search({'subPage': 'reportList'});
             $location.path(OverallDataSer.redirect['report']);
             return;
