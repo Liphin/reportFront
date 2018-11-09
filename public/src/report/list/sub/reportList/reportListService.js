@@ -274,8 +274,8 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
             'timestamp': ReListDataSer.reportList['list'][index]['timestamp'],
         };
         var url = OverallDataSer.urlData['backEndHttp']['getReportImgAndVoice'];
-        var resourceUrl = OverallDataSer.urlData['frontEndHttp']['getDynamicResource'];
-        alert(JSON.stringify(sendData));
+        var resourceUrl = OverallDataSer.urlData['frontEndHttp']['getReportResource'];
+        //alert(JSON.stringify(resourceUrl));
 
         //http请求数据
         OverallGeneralSer.httpPostData(url, sendData, function (responseData) {
@@ -285,7 +285,6 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
             ReListDataSer.reportList['editData']['data']['contact'] = "     "+ReListDataSer.reportList['list'][index]['contact'];
             ReListDataSer.reportList['editData']['data']['create_time'] = ReListDataSer.reportList['list'][index]['create_time'];
             ReListDataSer.reportList['editData']['data']['content'] = ReListDataSer.reportList['list'][index]['content'];
-            alert(JSON.stringify(responseData));
 
             var resourceList= responseData['resource'];
             for (var i in resourceList) {
@@ -302,8 +301,8 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
                     });
                 }
             }
-            alert(JSON.stringify(ReListDataSer.reportList['editData']['data']['resourceImg']));
-            alert(JSON.stringify(ReListDataSer.reportList['editData']['data']['resourceVoice']));
+            //alert(JSON.stringify(ReListDataSer.reportList['editData']['data']['resourceImg']));
+            //alert(JSON.stringify(ReListDataSer.reportList['editData']['data']['resourceVoice']));
 
         });
 
