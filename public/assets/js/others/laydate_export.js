@@ -215,48 +215,51 @@ function changeDate(event, id) {
 }
 
 
-$(function () {
+/**
+ * 鍒濆鍖栨棩鏈熼€夋嫨鍣紝骞舵坊鍔燞TML鍐呭
+ * @param id
+ * @param name
+ * @param height
+ * @returns {string}
+ */
+function initDatePicker(id, name, height) {
+    var picker = "";
+    picker += " <div class=\"laydate-box\" style=\"width: 100%;height: 100%\">\n";
+    picker += "     <input type=\"text\" name=\"" + name + "\" class=\"form-control laydateInput " + id + "\" placeholder=\"yyyy-MM-dd\" style=\"width: 100%;height: 100%;vertical-align: middle;display: inline-block\"/>\n";
+    picker += "     <div onclick=\"dataPanelHideShow(this, event ," + id + ")\" style=\"vertical-align: middle;display: inline-block;position: absolute;right: 15px;top: " + ((height - 25) / 2 + 5) + "px;/*动态更新top值*/;font-size: 12px;cursor: pointer;\">\n";
+    picker += "         <span class=\"dayIcon dayIcon" + id + "\" style=\"position: relative;z-index: 5;font-size: 12px; width: 20px; text-align: center; display: inline-block\"></span>\n";
+    picker += "         <img src=\"http://viewcoder-bucket.oss-cn-shenzhen.aliyuncs.com/cdn/img/calendar2.png\"  class=\"icon\" style=\"cursor:pointer\"/>\n";
+    picker += "     </div>\n";
+    picker += "     <div class=\"select-date select-date" + id + "\">\n";
+    picker += "         <div class=\"select-date-header\">\n";
+    picker += "             <ul class=\"heade-ul\" style='padding: 0;'>\n";
+    picker += "                 <li class=\"header-item header-item-one\">\n";
+    picker += "                     <select onchange=\"monthYearChange(event, " + id + ")\" onclick='event.stopPropagation()' class=\"yearList yearList" + id + "\"></select>\n";
+    picker += "                 </li>\n";
+    picker += "                 <li id=\"test\" class=\"header-item header-item-two\" onselectstart=\"return false\">\n";
+    picker += "                     <select onchange=\"monthYearChange(event," + id + ")\" onclick='event.stopPropagation()' class=\"monthList monthList" + id + "\"></select>\n";
+    picker += "                 </li>\n";
+    picker += "                 <li class=\"header-item header-item-three\" onselectstart=\"return false\" >\n";
+    picker += "                     <div class=\"btn btn-default\" onclick=\"reBackToday(event, " + id + ")\" style=\"padding: 4px 12px;outline:none\">回到今天</div>\n";
+    picker += "                 </li>\n";
+    picker += "             </ul>\n";
+    picker += "         </div>\n";
+    picker += "         <div class=\"select-date-body\" style=\"cursor:pointer\">\n";
+    picker += "             <ul class=\"week-list\">\n";
+    picker += "                 <li>日</li><li>一</li><li>二</li><li>三</li><li>四</li><li>五</li><li>六</li>\n";
+    picker += "             </ul>\n";
+    picker += "             <ul class=\"day-tabel" + id + "\" onclick=\"changeDate(event, " + id + ")\" style=\"padding: 0;\"></ul>\n";
+    picker += "         </div>\n";
+    picker += "     </div>\n";
+    picker += "</div>\n";
+    return picker;
+}
 
-    /**
-     * 鍒濆鍖栨棩鏈熼€夋嫨鍣紝骞舵坊鍔燞TML鍐呭
-     * @param id
-     * @param name
-     * @param height
-     * @returns {string}
-     */
-    function initDatePicker(id, name, height) {
-        var picker = "";
-        picker += " <div class=\"laydate-box\" style=\"width: 100%;height: 100%\">\n";
-        picker += "     <input type=\"text\" name=\"" + name + "\" class=\"form-control laydateInput " + id + "\" placeholder=\"yyyy-MM-dd\" style=\"width: 100%;height: 100%;vertical-align: middle;display: inline-block\"/>\n";
-        picker += "     <div onclick=\"dataPanelHideShow(this, event ," + id + ")\" style=\"vertical-align: middle;display: inline-block;position: absolute;right: 15px;top: " + ((height - 25) / 2 + 5) + "px;/*鍔ㄦ€佹洿鏂皌op鍊�*/;font-size: 12px;cursor: pointer;\">\n";
-        picker += "         <span class=\"dayIcon dayIcon" + id + "\" style=\"position: relative;z-index: 5;font-size: 12px; width: 20px; text-align: center; display: inline-block\"></span>\n";
-        picker += "         <img src=\"http://viewcoder-bucket.oss-cn-shenzhen.aliyuncs.com/cdn/img/calendar2.png\"  class=\"icon\" style=\"cursor:pointer\"/>\n";
-        picker += "     </div>\n";
-        picker += "     <div class=\"select-date select-date" + id + "\">\n";
-        picker += "         <div class=\"select-date-header\">\n";
-        picker += "             <ul class=\"heade-ul\" style='padding: 0;'>\n";
-        picker += "                 <li class=\"header-item header-item-one\">\n";
-        picker += "                     <select onchange=\"monthYearChange(event, " + id + ")\" class=\"yearList yearList" + id + "\"></select>\n";
-        picker += "                 </li>\n";
-        picker += "                 <li id=\"test\" class=\"header-item header-item-two\" onselectstart=\"return false\">\n";
-        picker += "                     <select onchange=\"monthYearChange(event," + id + ")\" class=\"monthList monthList" + id + "\"></select>\n";
-        picker += "                 </li>\n";
-        picker += "                 <li class=\"header-item header-item-three\" onselectstart=\"return false\" >\n";
-        picker += "                     <div class=\"btn btn-default\" onclick=\"reBackToday(event, " + id + ")\" style=\"padding: 4px 12px;outline:none\">鍥炲埌浠婂ぉ</div>\n";
-        picker += "                 </li>\n";
-        picker += "             </ul>\n";
-        picker += "         </div>\n";
-        picker += "         <div class=\"select-date-body\" style=\"cursor:pointer\">\n";
-        picker += "             <ul class=\"week-list\">\n";
-        picker += "                 <li>鏃�</li><li>涓€</li><li>浜�</li><li>涓�</li><li>鍥�</li><li>浜�</li><li>鍏�</li>\n";
-        picker += "             </ul>\n";
-        picker += "             <ul class=\"day-tabel" + id + "\" onclick=\"changeDate(event, " + id + ")\" style=\"padding: 0;\"></ul>\n";
-        picker += "         </div>\n";
-        picker += "     </div>\n";
-        picker += "</div>\n";
-        return picker;
-    }
 
+/**
+ * 触发获取日期数据
+ */
+function triggerDatePicker() {
     /**
      * 娓叉煋姣忎釜鏃ユ湡閫夋嫨鍣�
      */
@@ -266,24 +269,6 @@ $(function () {
         $(this).html(pickerStr);
     });
 
-
-    //濡傛灉榧犳爣鎸夊湪澶栭潰绌虹櫧鍖哄煙鍒欐棩鏈熼€夋嫨闈㈡澘娑堝け
-    $(window).click(function () {
-        $(".select-date").each(function () {
-            if ($(this).css("display") == "block") {
-                $(this).css("display", "none")
-            }
-        })
-    });
-
-
-    /**
-     * 骞翠唤鍜屾湀浠界殑click浜嬩欢鎹曡幏
-     */
-    $(".yearList,.monthList").on("click", function (e) {
-        e.stopPropagation();
-    });
-
     /**
      * 骞存湀鏃ユ椂闂撮€夋嫨鍣�
      * @type {Array}
@@ -291,13 +276,13 @@ $(function () {
     var yearArr = [];
     var monthArr = [];
     for (var i = 1900; i < 2099; i++) {
-        yearArr.push(i + "骞�");
-        var optionYear = '<option value="' + i + '">' + i + "骞�" + "</option>";
+        yearArr.push(i + "年");
+        var optionYear = '<option value="' + i + '">' + i + "年" + "</option>";
         $(".yearList").append(optionYear)
     }
     for (var j = 1; j < 13; j++) {
-        monthArr.push(j + "鏈�");
-        var optionMonth = '<option value="' + j + '">' + j + "鏈�" + "</option>";
+        monthArr.push(j + "月");
+        var optionMonth = '<option value="' + j + '">' + j + "月" + "</option>";
         $(".monthList").append(optionMonth)
     }
 
@@ -311,5 +296,24 @@ $(function () {
     var currDate = d.getDate();
     $(".laydateInput").val(currYear + "-" + currMonth + "-" + currDate);
     $(".dayIcon").html(currDate);
+}
+
+
+
+//选择日期时的展示与隐藏
+$(window).click(function () {
+    console.log('click window')
+    $(".select-date").each(function () {
+        if ($(this).css("display") == "block") {
+            $(this).css("display", "none")
+        }
+    })
+});
+
+
+
+
+$(function () {
+
 
 });

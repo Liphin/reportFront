@@ -166,24 +166,21 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
      * 鼠标点击选择展示某目标页面的新闻列表数据
      */
     var searchReportList = function () {
-        // ReListDataSer.overallData['search']['startDate']= $("input[name='startDate']").val();
-        // ReListDataSer.overallData['search']['endDate']= $("input[name='endDate']").val();
-        //alert(JSON.stringify(ReListDataSer.overallData['search']));
-        if (ReListDataSer.overallData['search']['startDate'].length <= 0 ||
-            ReListDataSer.overallData['search']['endDate'].length <= 0) {
+        var inputStartDate = $("input[name='startDate']").val();
+        var inputEndDate = $("input[name='endDate']").val();
+
+        if (!OverallGeneralSer.checkDataNotEmpty(inputStartDate) || !OverallGeneralSer.checkDataNotEmpty(inputEndDate)) {
             alert("请输入指定搜素日期");
         }
-        else if (ReListDataSer.overallData['search']['startDate'] >
-            ReListDataSer.overallData['search']['endDate']) {
+        else if (inputStartDate > inputEndDate) {
             alert("结束日期小于开始日期，请重新输入");
         }
         else {
             //提交表单数据
             var url = OverallDataSer.urlData['backEndHttp']['searchReportList'];
-            var startDate = OverallGeneralSer.generateSearchTime(ReListDataSer.overallData['search']['startDate'], 1);
-            var endDate = OverallGeneralSer.generateSearchTime(ReListDataSer.overallData['search']['endDate'], 2);
-            //alert(JSON.stringify(startDate));
-            //alert(JSON.stringify(endDate));
+            var startDate = OverallGeneralSer.generateSearchTime(inputStartDate, 1);
+            var endDate = OverallGeneralSer.generateSearchTime(inputEndDate, 2);
+            console.log(startDate, endDate)
             var sendData = {
                 'startDate': startDate,
                 'endDate': endDate,
@@ -198,18 +195,17 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
                 //重置数据顺序：1、根据置顶标签排在前面，2、置顶的数据中根据置顶时间戳进行排序
                 var friendCircleListSortedData = data.sort(sortStickNum);
                 //循环填充新闻list数据
-                //alert("6666");
                 for (var i in friendCircleListSortedData) {
                     //装载朋友圈list数据
                     ReListDataSer.reportList['list'].push(friendCircleListSortedData[i]);
                 }
                 //设置total_num为0，取消分页
-                ReListDataSer.overallData['listShow']['totalNum'] = 0;
+                ReListDataSer.overallData['totalNum'] = 0;
                 //获取新数据后页面滚动到列表顶部
                 angular.element("60newsList").scrollTop = 0;
             })
         }
-    }
+    };
 
     /**
      * 新闻操作

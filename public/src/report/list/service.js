@@ -13,6 +13,13 @@ app.factory('ReportSer', function ($http, $window, $location, ReListDataSer, Ove
         //获取指定范围内的诉讼信息
         ReListSer.getRangeReportInfo();
 
+        /**
+         * 初始化时间选择器
+         */
+        setTimeout(function () {
+            triggerDatePicker();
+        }, 500);
+
         //不进行页面subPage跳转
         // var targetSubPage = $location.search()['subPage'];
         // if (!(OverallGeneralSer.checkDataNotEmpty(targetSubPage))) {
