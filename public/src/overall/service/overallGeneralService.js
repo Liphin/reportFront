@@ -134,9 +134,14 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
     /**
      * http post获取资源数据
      */
-    var httpPostData = function (url, obj, callback) {
+    var httpPostData = function (url, obj, callback, markLoadData) {
         //设置loading状态
-        OverallDataSer.overallData['loadingData'] = true;
+        if (markLoadData != undefined) {
+            OverallDataSer.overallData['loadingData'] = markLoadData;
+        } else {
+            OverallDataSer.overallData['loadingData'] = true;
+        }
+
 
         var fd = new FormData();
         //动态装载数据
@@ -169,12 +174,12 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
      * @param createTime
      * @returns {string}
      */
-    var generateSearchTime = function (dateTime,optType) {
-        if (optType==1) {
-            var searchTime=dateTime+" 00:00:00";
+    var generateSearchTime = function (dateTime, optType) {
+        if (optType == 1) {
+            var searchTime = dateTime + " 00:00:00";
         }
-        else if (optType==2) {
-            var searchTime=dateTime+" 23:59:59";
+        else if (optType == 2) {
+            var searchTime = dateTime + " 23:59:59";
         }
 
         return searchTime;
@@ -194,8 +199,8 @@ overallModule.factory('OverallGeneralSer', function ($http, OverallDataSer, $tim
 
 
     return {
-        httpGetFiles:httpGetFiles,
-        httpPostData:httpPostData,
+        httpGetFiles: httpGetFiles,
+        httpPostData: httpPostData,
         getTimeStamp: getTimeStamp,
         sqlInjectFilter: sqlInjectFilter,
         checkDataNotEmpty: checkDataNotEmpty,

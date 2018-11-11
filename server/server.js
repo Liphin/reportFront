@@ -41,7 +41,7 @@ app.use(bodyParser.urlencoded({limit: serverSerData.httpDataLimit, extended: tru
  * 返回基础配置文件
  */
 app.get('/targetSetting', function (req, res) {
-    res.send(serverSerData.targetSetting)
+    //res.send(serverSerData.targetSetting)
 });
 
 /**

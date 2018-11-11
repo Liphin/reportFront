@@ -6,21 +6,30 @@ var app = angular.module('Angular.relist');
 app.factory('ReListDataSer', function () {
 
     var MAX_CREATE_TIME =  '2088-01-01 00:00:00';
+    var audioObject = new Audio();
     var reportList={
         'list': [],
         'editData': {
-            'editIndex': '',
-            'timestamp': '',
+            'editIndex': '', //预览list数据时的index
+            'timestamp': '', //预览list数据的timestamp
             'data': {
+                'openid': '',
                 'name': '',
                 'contact': '',
+                'timestamp': '',
                 'create_time': '',
                 'content': '',
+                'realm': '',
                 'resourceImg': [],
-                'resourceVoice': [],
+                'resourceVoice': []
             },
+
+            'target_img_index':0, //选择的目标图片的index
+            'view_picture':false, //查看图片开关
+            'target_voice_index':0 //选择的目标音频的index
         },
-    }; //诉讼数据
+        'audio' : audioObject //音频播放object
+    };
 
     var overallData =  {
         'totalNum':0, //消息总数
@@ -43,8 +52,8 @@ app.factory('ReListDataSer', function () {
                 2: '国有土地使用权出让',
                 3: '国有财产保护',
                 4: '英烈权益保护',
-                5: '所有类型',
-            },
+                5: '所有类型'
+            }
 
         },
         'search': {

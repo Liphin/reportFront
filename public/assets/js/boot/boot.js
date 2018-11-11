@@ -2,8 +2,8 @@
  * Created by Administrator on 2016/10/12.
  */
 head.load(
-    //'vendor/jquery/jquery-1.11.0.js',
-    'http://cdn.static.runoob.com/libs/jquery/1.11.0/jquery.min.js',
+    'assets/js/jquery/jquery-1.11.0.js',
+    //'http://cdn.static.runoob.com/libs/jquery/1.11.0/jquery.min.js',
 
     //'vendor/angular/angular.js',
     'https://cdn.bootcss.com/angular.js/1.5.8/angular.js',
@@ -27,7 +27,15 @@ head.load(
     'https://cdn.bootcss.com/blueimp-md5/2.5.0/js/md5.min.js',//md5加密
 
     //js.cookie.min.js
-    '/assets/js/others/js.cookie.min.js',
+    'assets/js/others/js.cookie.min.js',
+
+    //日期选择器
+    'assets/js/others/laydate_export.js',
+
+    //下载组件模块
+    'assets/js/jquery/Blob.js',
+    'assets/js/jquery/FileSaver.js',
+    'assets/js/jquery/jqueryBinaryTransport.js',
 
 
     /*overall part Angular框架全局设置*/
@@ -56,6 +64,7 @@ head.load(
     'src/report/list/module.js',
     'src/report/list/service.js',
     'src/report/list/data.js',
+    'src/report/list/sub/common/reportGeneral.js',
     'src/report/list/sub/reportList/reportListService.js',
     'src/report/list/sub/viewReport/viewReportService.js',
     'src/report/list/directive.js',

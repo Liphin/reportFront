@@ -1,60 +1,29 @@
 var app = angular.module('Angular.relist');
 
-app.factory('ViewReportSer', function ($http, $window, $timeout, $location, ReListDataSer, OverallGeneralSer,OverallDataSer) {
+app.factory('ViewReportSer', function ($http, $window, $timeout, $location, ReListDataSer, OverallGeneralSer, OverallDataSer, ReportGeneral) {
 
     /**
      * 查看详情
      */
     var moveViewReport = function (optType) {
         var index = 0;
-        if (optType==0) {
-            index = ReListDataSer.reportList['editData']['editIndex']-1;
+        if (optType == 0) {
+            index = ReListDataSer.reportList['editData']['editIndex'] - 1;
         }
-        else if(optType==1) {
-            index = ReListDataSer.reportList['editData']['editIndex']+1;
+        else if (optType == 1) {
+            index = ReListDataSer.reportList['editData']['editIndex'] + 1;
         }
 
-        if(optType==0&&index<0) {
+        //提醒客户数据已超出范围
+        if (optType == 0 && index < 0) {
             alert("已是第一条记录，请查看下一条");
         }
-        else if(optType==1&&ReListDataSer.reportList['list'][index]['timestamp'].length<=0) {
+        else if (optType == 1 && !OverallGeneralSer.checkDataNotEmpty(ReListDataSer.reportList['list'][index])) {
             alert("已是最后一条记录，请查看上一条");
         }
         else {
-            var fd = new FormData();
-            var url = OverallDataSer.urlData['backEndHttp']['getReportImgAndVoice'];
-            var resourceUrl = OverallDataSer.urlData['frontEndHttp']['getDynamicResource'];
-            fd.append('timestamp', ReListDataSer.reportList['list'][index]['timestamp']);
-
-            ReListDataSer.reportList['editData']['data'].length=0;
-
-            //http请求数据
-            OverallGeneralSer.httpPostData(url, fd, function (responseData) {
-                ReListDataSer.reportList['editData']['editIndex'] = index;
-                ReListDataSer.reportList['editData']['timestamp'] = ReListDataSer.reportList['list'][index]['timestamp'];
-                ReListDataSer.reportList['editData']['data']['name'] = ReListDataSer.reportList['list'][index]['name'];
-                ReListDataSer.reportList['editData']['data']['contact'] = "     "+ReListDataSer.reportList['list'][index]['contact'];
-                ReListDataSer.reportList['editData']['data']['create_time'] = ReListDataSer.reportList['list'][index]['create_time'];
-                ReListDataSer.reportList['editData']['data']['content'] = ReListDataSer.reportList['list'][index]['content'];
-
-                var resourceList= responseData['resource'];
-                for (var i in resourceList) {
-                    if (resourceList[i]['type']==1) {
-                        ReListDataSer.reportList['editData']['data']['resourceImg'].push({
-                            'url': resourceUrl + resourceList[i]['filename'].trim(),
-                            'name': resourceList[i]['filename'].trim()
-                        });
-                    }
-                    else if (resourceList[i]['type']==2) {
-                        ReListDataSer.reportList['editData']['data']['resourceVoice'].push({
-                            'url': resourceUrl + resourceList[i]['filename'].trim(),
-                            'name': resourceList[i]['filename'].trim()
-                        });
-                    }
-                }
-                alert(JSON.stringify(ReListDataSer.reportList['editData']['data']));
-
-            });
+            //传递index，预览指定下标的诉讼数据
+            ReportGeneral.viewReport(index);
         }
     };
 
@@ -72,9 +41,45 @@ app.factory('ViewReportSer', function ($http, $window, $timeout, $location, ReLi
         $window.location.reload();
     };
 
+
+    /**
+     * 播放或暂停音频按键
+     */
+    var playPauseVoice = function (index) {
+        //前端显示暂停播放其他音频
+        for (var i in ReListDataSer.reportList['editData']['data']['resourceVoice']) {
+            if (i != index) {
+                ReListDataSer.reportList['editData']['data']['resourceVoice'][i]['play'] = false;
+            }
+        }
+
+        //如果目标音频是播放状态则停止播放，否则播放该音频
+        if (ReListDataSer.reportList['editData']['data']['resourceVoice'][index]['play']) {
+            ReListDataSer.reportList.audio.pause();
+
+        } else {
+            console.log(ReListDataSer.reportList['editData']['data']['resourceVoice'][index]['url'])
+            ReListDataSer.reportList.audio.src = ReListDataSer.reportList['editData']['data']['resourceVoice'][index]['url'];
+            ReListDataSer.reportList.audio.play();
+            ReListDataSer.reportList['editData']['target_voice_index'] = index; //设置目标播放音频数组的下标
+        }
+
+        //改变前端目标音频的播放状态
+        ReListDataSer.reportList['editData']['data']['resourceVoice'][index]['play'] = !ReListDataSer.reportList['editData']['data']['resourceVoice'][index]['play'];
+    };
+
+
+
+
     return {
         moveViewReport: moveViewReport,
         returnBackList: returnBackList,
+        playPauseVoice: playPauseVoice
     }
 
 });
+
+
+
+
+

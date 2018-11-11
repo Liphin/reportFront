@@ -3,7 +3,7 @@
  */
 var app = angular.module('Angular.relist');
 
-app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, OverallGeneralSer,OverallDataSer) {
+app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, OverallGeneralSer, OverallDataSer, ReportGeneral) {
 
 
     /**
@@ -23,7 +23,7 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
         //http请求数据
         OverallGeneralSer.httpPostData(OverallDataSer.urlData['backEndHttp']['getRangeReport'], data, function (responseData) {
             var totalNum = responseData['totalNum'];
-            var reportList= responseData['reportList'];
+            var reportList = responseData['reportList'];
 
             //设置全部新闻条目数目
             ReListDataSer.overallData['totalNum'] = totalNum;
@@ -49,14 +49,13 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
      * 1、根据诉讼条目的处理状态进行排序
      */
     var sortStickNum = function (a, b) {
-        if(a['status'] == b['status']){
+        if (a['status'] == b['status']) {
             return new Date(b['create_time']) - new Date(a['create_time']);
 
-        }else {
+        } else {
             return a['status'] - b['status']
         }
     };
-
 
 
     /**
@@ -104,7 +103,6 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
             ReListDataSer.overallData['pagination']['pre'] = true;
         }
     };
-
 
 
     /**
@@ -171,25 +169,25 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
         // ReListDataSer.overallData['search']['startDate']= $("input[name='startDate']").val();
         // ReListDataSer.overallData['search']['endDate']= $("input[name='endDate']").val();
         //alert(JSON.stringify(ReListDataSer.overallData['search']));
-        if (ReListDataSer.overallData['search']['startDate'].length<=0||
-            ReListDataSer.overallData['search']['endDate'].length<=0) {
+        if (ReListDataSer.overallData['search']['startDate'].length <= 0 ||
+            ReListDataSer.overallData['search']['endDate'].length <= 0) {
             alert("请输入指定搜素日期");
         }
-        else if (ReListDataSer.overallData['search']['startDate']>
+        else if (ReListDataSer.overallData['search']['startDate'] >
             ReListDataSer.overallData['search']['endDate']) {
             alert("结束日期小于开始日期，请重新输入");
         }
         else {
             //提交表单数据
             var url = OverallDataSer.urlData['backEndHttp']['searchReportList'];
-            var startDate = OverallGeneralSer.generateSearchTime(ReListDataSer.overallData['search']['startDate'],1);
-            var endDate = OverallGeneralSer.generateSearchTime(ReListDataSer.overallData['search']['endDate'],2);
+            var startDate = OverallGeneralSer.generateSearchTime(ReListDataSer.overallData['search']['startDate'], 1);
+            var endDate = OverallGeneralSer.generateSearchTime(ReListDataSer.overallData['search']['endDate'], 2);
             //alert(JSON.stringify(startDate));
             //alert(JSON.stringify(endDate));
             var sendData = {
                 'startDate': startDate,
                 'endDate': endDate,
-                'type' : ReListDataSer.overallData['search']['type'],
+                'type': ReListDataSer.overallData['search']['type'],
             };
 
             //获取搜索的内容
@@ -268,49 +266,14 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
         });
     };
 
+
     /**
      * 查看详情
      */
     var viewReport = function (index) {
-        var sendData = {
-            'timestamp': ReListDataSer.reportList['list'][index]['timestamp'],
-        };
-        var url = OverallDataSer.urlData['backEndHttp']['getReportImgAndVoice'];
-        var resourceUrl = OverallDataSer.urlData['frontEndHttp']['getReportResource'];
-        //alert(JSON.stringify(resourceUrl));
-
-        //http请求数据
-        OverallGeneralSer.httpPostData(url, sendData, function (responseData) {
-            ReListDataSer.reportList['editData']['editIndex'] = index;
-            ReListDataSer.reportList['editData']['timestamp'] = ReListDataSer.reportList['list'][index]['timestamp'];
-            ReListDataSer.reportList['editData']['data']['name'] = ReListDataSer.reportList['list'][index]['name'];
-            ReListDataSer.reportList['editData']['data']['contact'] = "     "+ReListDataSer.reportList['list'][index]['contact'];
-            ReListDataSer.reportList['editData']['data']['create_time'] = ReListDataSer.reportList['list'][index]['create_time'];
-            ReListDataSer.reportList['editData']['data']['content'] = ReListDataSer.reportList['list'][index]['content'];
-
-            var resourceList= responseData['resource'];
-            for (var i in resourceList) {
-                if (resourceList[i]['type']==1) {
-                    ReListDataSer.reportList['editData']['data']['resourceImg'].push({
-                        'url': resourceUrl + resourceList[i]['filename'].trim(),
-                        'name': resourceList[i]['filename'].trim()
-                    });
-                }
-                else if (resourceList[i]['type']==2) {
-                    ReListDataSer.reportList['editData']['data']['resourceVoice'].push({
-                        'url': resourceUrl + resourceList[i]['filename'].trim(),
-                        'name': resourceList[i]['filename'].trim()
-                    });
-                }
-            }
-            //alert(JSON.stringify(ReListDataSer.reportList['editData']['data']['resourceImg']));
-            //alert(JSON.stringify(ReListDataSer.reportList['editData']['data']['resourceVoice']));
-
-        });
-
-        $location.search({'subPage': 'viewReport'});
+        //传递index，预览指定下标的诉讼数据
+        ReportGeneral.viewReport(index);
     };
-
 
 
     /**
@@ -355,7 +318,7 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
     return {
         getRangeReportInfo: getRangeReportInfo,
         getBatchRangeReportInfo: getBatchRangeReportInfo,
-        showTargetNumReportList:showTargetNumReportList,
+        showTargetNumReportList: showTargetNumReportList,
         searchReportList: searchReportList,
         ReListOpt: ReListOpt,
         deleteBatchReport: deleteBatchReport,

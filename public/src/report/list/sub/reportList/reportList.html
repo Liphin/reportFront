@@ -1,4 +1,4 @@
-<div ng-if="relist.navigation['report']['reportList']" style="width: 100%;min-width: 1316px;text-align: center;line-height: normal; white-space:normal; background: rgba(255,255,255,1);" align="center">
+<div style="width: 100%;min-width: 1016px;text-align: center;line-height: normal; white-space:normal; background: rgba(255,255,255,1);" align="center">
     <!--管理员退出登录按钮-->
     <sign-out></sign-out>
     <!-----------响应式布局----------->
@@ -47,21 +47,14 @@
         <!--选择日期-->
         <!--日期css加载-->
         <!--日期选择器-->
-        <script src="http://viewcoder.beansonbar.cn/cdn/js/laydate_export.js"></script>
-        <link rel="stylesheet" href="http://viewcoder.beansonbar.cn/cdn/css/laydate.css">
-
         <div style="position: absolute;top: 100px; height: 34px; z-index:45; left: 608px; width: 96px; padding: 6px 12px 6px 12px; color: rgba(255,0,255,1.0); text-align: center; ">指定日期</div>
         <!--<div id="calend" ng-model="relist.overallData['search']['startDate']" class="calend" style="position: absolute;top: 100px; height: 34px; z-index:43; left: 708px; width: 176px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: #d85a54; border-radius: 5px 5px 5px 5px; background:#d85a54; color: rgba(255,255,255,1.0); text-align: center; ">请选择日期</div>-->
-        <div align="center" style="position: relative; display: inline-block;width:1316px;height:1080px;">
-            <!-- 日期选择器 -->
-            <div id="5" name="startDate" style="position: absolute;top: 100px; height: 36px; z-index:43; left: 708px; width: 208px; " class="viewcoder-datepicker"></div>
-        </div>
+        <!-- 日期选择器 -->
+        <div id="5" name="startDate" style=" height: 36px; z-index:43; width: 208px; " class="viewcoder-datepicker"></div>
         <div style="position: absolute;top: 100px; height: 34px; z-index:45; left: 888px; width: 15px; padding: 6px 12px 6px 12px; color: rgba(255,0,255,1.0); text-align: center; ">至</div>
         <!--<div id="calend1" ng-model="relist.overallData['search']['endDate']" class="calend" style="position: absolute;top: 100px; height: 34px; z-index:45; left: 928px; width: 176px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: #d85a54; border-radius: 5px 5px 5px 5px; background:#d85a54; color: rgba(255,255,255,1.0); text-align: center; ">请选择日期</div>-->
-        <div align="center" style="position: relative; display: inline-block;width:1316px;height:1080px;">
-            <!-- 日期选择器 -->
-            <div id="6" name="endDate" style="position: absolute;top: 100px; height: 36px; z-index:43; left: 928px; width: 208px; " class="viewcoder-datepicker"></div>
-        </div>
+        <!-- 日期选择器 -->
+        <div id="6" name="endDate" style="height: 36px; z-index:43; left: 928px; " class="viewcoder-datepicker"></div>
 
         <!--<input type="text" ng-keydown="" ng-model="relist.overallData['search']['startDate']" class="form-control" placeholder="请选择日期" id="47" name="Input_47" style="position: absolute;top: 100px; height: 34px; z-index:47; left: 708px; width: 176px; padding: 6px 22px 6px 22px; background:rgba(255,255,255,1); color: rgba(0,0,0,1.0); border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(100,100,100,0.4); border-radius: 20px 20px 20px 20px; ">-->
         <!--<input type="text" ng-keydown="" ng-model="relist.overallData['search']['endDate']" class="form-control" placeholder="请选择日期" id="47" name="Input_47" style="position: absolute;top: 100px; height: 34px; z-index:47; left: 928px; width: 176px; padding: 6px 22px 6px 22px; background:rgba(255,255,255,1); color: rgba(0,0,0,1.0); border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(100,100,100,0.4); border-radius: 20px 20px 20px 20px; ">-->
@@ -117,11 +110,7 @@
                         <input style="margin-top: 12px" type="checkbox" ng-model="news['toDelete']">
                     </th>
                     <td style="padding: 15px 0 0 0;text-align: center; width: 128px;">
-                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);" ng-if="report['realm']==0">生态环境和资源保护</span>
-                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);" ng-if="report['realm']==1">食品药品安全</span>
-                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);" ng-if="report['realm']==2">国有土地使用权出让</span>
-                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);" ng-if="report['realm']==3">国有财产保护</span>
-                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);" ng-if="report['realm']==4">英烈权益保护</span>
+                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{relist.overallData['mapData']['newsType'][report['realm']]}}</span>
                     </td>
                     <td style="padding: 15px 0 0 0;text-align: center; width: 278px;font-size: 13px;">
                         <span style="width: 270px;display: inline-block;font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);overflow: hidden; white-space: nowrap; text-overflow: ellipsis">{{report['content']}}</span>

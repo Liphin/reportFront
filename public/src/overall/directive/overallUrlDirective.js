@@ -33,6 +33,16 @@ overallModule.directive('viewReport', ['$document', function ($document) {
     };
 }]);
 
+/**
+ * 预览图片页面
+ */
+overallModule.directive('viewPicture', ['$document', function ($document) {
+    return {
+        restrict: 'E',
+        templateUrl: 'src/report/list/sub/viewReport/viewPicture.html'
+    };
+}]);
+
 
 
 

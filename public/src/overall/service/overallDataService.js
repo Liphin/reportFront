@@ -16,7 +16,7 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
         'backEndHttp': "http://127.0.0.1:8082/",
         'frontEndHttp': "http://127.0.0.1:3032/",
         'ossHttp': "",
-        'resource_http_request': '',
+        'resource_http_request': 'https://liphin.com:3032/resource/' //资源路径
     };
 
     // http请求的具体路径
@@ -28,11 +28,11 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
             'searchReportList': baseUrlData['backEndHttp'] + 'searchReportList',
             'deleteReport': baseUrlData['backEndHttp'] + 'deleteReport',
             'deleteBranchReport': baseUrlData['backEndHttp'] + 'deleteBranchReport',
-            'getReportImgAndVoice': baseUrlData['backEndHttp'] + 'getReportImgAndVoice',
+            'getReportImgAndVoiceToPc': baseUrlData['backEndHttp'] + 'getReportImgAndVoiceToPc',
         },
         'frontEndHttp': {
             'getSqlKeyWord': baseUrlData['frontEndHttp'] + 'helper/sqlKeyWord.txt',
-            'getReportResource': baseUrlData['frontEndHttp'] + 'resource/',
+            'getReportResource': baseUrlData['resource_http_request'],
         }
     };
 
@@ -49,6 +49,9 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
 
     var zIndexHelper = {
         'loading': 500000,
+        'manager': 100,
+        'viewReport':1000,
+        'viewPicture':1001
     };
 
 

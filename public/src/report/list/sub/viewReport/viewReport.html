@@ -1,52 +1,152 @@
-<div ng-if="relist.navigation['report']['viewReport']" align="center" style="position: relative; display: inline-block;width:1316px;height:1080px;">
-    <!--页面头部-->
-    <div style="z-index: 100;position: absolute; left: 60px; top: 20px;">
-        <img src="assets/img/report/checker_logo.png" style="width: 30px; height: 30px">
-        <span style="color: white;  font-size: 16px; margin-left: 10px">西检公益诉讼</span>
-    </div>
+<!--预览诉讼数据条目展示的页面  ng-if="relist.navigation['report']['viewReport']"  -->
+<div align="center" ng-if="relist.navigation['report']['viewReport']"
+     style="background: rgba(0,0,0,0.4); position: fixed;top:0; left: 0; right: 0; bottom: 0;z-index: {{zIndexHelper['viewReport']}}">
+    <!--诉讼数据内容展示区域-->
+    <div style="display: flex; align-items: center; justify-content: center">
 
-    <!-- 文本 -->
-    <span id="4" name="Text_4" style="position: absolute;top: 84px; height: 40px; z-index:10000; left: 217px; width: 170px; font-size: 28px; font-weight: bold; color: rgba(19,18,18,1.0); background:rgba(255,255,255,1); ">诉讼详情</span>
-    <!-- 文本 -->
-    <span id="6" name="Text_6" style="position: absolute;top: 153px; height: 40px; z-index:6; left: 284px; width: 170px; background:rgba(255,255,255,1); ">{{relist.reportList['editData']['data']['name']}}</span>
-    <!-- 文本 -->
-    <span id="7" name="Text_7" style="position: absolute;top: 148px; height: 40px; z-index:7; left: 586px; width: 170px; background:rgba(255,255,255,1); ">{{relist.reportList['editData']['data']['contact']}}</span>
-    <!-- 文本 -->
-    <span id="8" name="Text_8" style="position: absolute;top: 143px; height: 40px; z-index:8; left: 932px; width: 170px; background:rgba(255,255,255,1); ">{{relist.reportList['editData']['data']['create_time']}}</span>
-    <!-- 文本 -->
-    <span id="9" name="Text_9" style="position: absolute;top: 211px; height: 40px; z-index:9; left: 284px; width: 170px; font-size: 18px; font-weight: bold; color: rgba(29,26,26,1.0); background:rgba(255,255,255,1); ">诉讼内容：</span>
-    <!-- 文本 -->
-    <span id="10" name="Text_10" style="position: absolute;top: 278px; height: 317px; z-index:10; left: 283px; width: 765px; background:rgba(214,199,199,1); ">{{relist.reportList['editData']['data']['content']}}</span>
-    <!-- 文本 -->
-    <span id="11" name="Text_11" style="position: absolute;top: 153px; height: 27px; z-index:11; left: 224px; width: 56px; font-weight: bold; color: rgba(29,26,26,1.0); background:rgba(255,255,255,1); ">诉讼人：</span>
-    <!-- 文本 -->
-    <span id="12" name="Text_12" style="position: absolute;top: 149px; height: 27px; z-index:12; left: 506px; width: 71px; font-weight: bold; color: rgba(29,26,26,1.0); background:rgba(255,255,255,1); ">联系方式：</span>
-    <!-- 文本 -->
-    <span id="13" name="Text_13" style="position: absolute;top: 143px; height: 27px; z-index:13; left: 855px; width: 71px; font-weight: bold; color: rgba(29,26,26,1.0); background:rgba(255,255,255,1); ">提交时间：</span>
-    <!-- 按钮 -->
-    <button ng-click="relist.returnBackList()" id="2" name="Btn_2" style="position: absolute;top: 85px; height: 42px; z-index:2; left: 34px; width: 87px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(247,235,235,0.4); border-radius: 5px 5px 5px 5px; background:rgba(28,194,217,1); font-size: 23px; font-family: 宋体; color: rgba(0,0,0,1.0); text-decoration: blink; text-align: center; ">返回</button>
+        <!--诉讼内容详情-->
+        <div style="height: 90%;background: white;width: 900px; max-height: 700px; display: flex;flex-direction: column; ">
 
-    <!-- 图片 -->
-    <div style="position: absolute;top: 612px;left: 257px;z-index:58;text-align: left">
-        <div class="coverImgShow" ng-repeat="img in relist.reportList['editData']['data']['resourceImg'] track by $index" id="58" name="Image_58" style="display: inline-block;margin-right: 7px;height: 70px; left: 268px; width: 68px; background: url({{img['url']}}) no-repeat ; background-size: cover; ">
-            <!--<div class="removeCoverImgShow" ng-click="content.deleteFriendImg($index)" style="position: relative;top: -5px;left: 53px;cursor: pointer;width: 20px;height: 20px;border-radius: 10px; background: #ff4747;">-->
-                <!--<span aria-hidden="true" style="color: white;font-size: 15px;position: relative; top:2px; left: 6px">&times;</span>-->
-            <!--</div>-->
+            <!--页面头部-->
+            <div style="z-index: 100;height: 60px; border: 1px solid lightgrey;text-align: left">
+                <span style="font-size: 16px; position: relative;left: 20px; top: 17px;">
+                    诉讼信息
+                    <span ng-if="relist.reportList['editData']['data']['status']==1"
+                          style="color: orange; font-weight: bold">（待处理）</span>
+                    <span ng-if="relist.reportList['editData']['data']['status']==2"
+                          style="color: mediumseagreen; font-weight: bold">（已处理）</span>
+                </span>
+                <span ng-click="relist.navigation['report']['viewReport']=false"
+                      style="float: right; position: relative; top:7px; right: 30px; font-size: 27px; cursor: pointer;color: grey">&times;</span>
+            </div>
+
+            <!--展示诉讼信息-->
+            <div style="flex: 1; display: flex; flex-direction: row;">
+                <div style="flex: 2; border: 1px solid lightgrey; border-width: 0 1px 0 0;text-align: left; padding: 20px 20px;font-size: 15px; position: relative">
+                    <div style="display: flex; flex-direction: row;">
+                        <div style="flex: 1">
+                            <span class='fa fa-user-o' style="color: #608fb7"></span>
+                            <span style="margin-left: 5px">诉讼人：</span>
+                            <span style="margin-left: 16px">{{relist.reportList['editData']['data']['name']}}</span>
+                        </div>
+                        <div style="flex: 1">
+                            <span class='fa fa-mobile' style="color: #608fb7; font-size: 22px"></span>
+                            <span style="margin-left: 10px">联系方式：</span>
+                            <span>{{relist.reportList['editData']['data']['contact']}}</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: row;margin: 10px 0 0 0;">
+                        <div style="flex: 1">
+                            <span class='fa fa-gg' style="color: #608fb7; position: relative; left: -2px"></span>
+                            <span style="margin-left: 0">所属领域：</span>
+                            <span>{{relist.overallData['mapData']['newsType'][relist.reportList['editData']['data']['realm']]}}</span>
+                        </div>
+                        <div style="flex: 1">
+                            <span class="fa fa-calendar" style="color: #608fb7"></span>
+                            <span style="margin-left: 7px">提交时间：</span>
+                            <span>{{relist.reportList['editData']['data']['create_time']}}</span>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: row; margin: 13px 0 0 0;">
+                        <span class="fa fa-list-alt" style="color: #608fb7; position: relative; top: 3px;"></span>
+                        <div style="width: 80px; margin-left: 7px">诉讼内容：</div>
+                        <div style="flex: 1; padding: 0 30px 0 0">{{relist.reportList['editData']['data']['content']}}
+                        </div>
+                    </div>
+
+
+                    <!--页面最后的上一条，下一条，下载按钮-->
+                    <div style="position: absolute; bottom: 20px;text-align: center; width: 100%">
+                        <button class="btn btn-default" ng-click="relist.moveViewReport(0)">上一条</button>
+                        <button class="btn btn-default" ng-click="relist.moveViewReport(1)" style="margin-left: 10px">下一条</button>
+                        <!--资源文件下载-->
+                        <button class="btn btn-default" style="margin-left: 10px; border-color: #608fb7" ng-click="relist.downloadZipResourceFile()">
+                            <span class="fa fa-download" style="color: #608fb7"></span>
+                            <span style="color: #296780">下载图片音频附件</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!--展示诉讼资源-->
+                <div style="flex: 1;font-size: 15px; overflow: auto" class="scrollBar-7">
+
+                    <!--图片资源文件展示-->
+                    <div style="">
+                        <div style="margin: 15px 0 0 0">图片</div>
+                        <div style="padding: 10px 0 10px 27px; text-align: left">
+                            <div ng-repeat="img in relist.reportList['editData']['data']['resourceImg'] track by $index"
+                                 ng-click="relist.viewLargeImg($index)"
+                                 style="cursor: pointer;border: 1px solid lightgrey; padding: 7px;display: inline-block;margin: 0 12px 12px 0;">
+                                <div style="background: url({{img['url']}}) no-repeat center center; background-size: cover;width: 50px; height: 50px"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--音频资源文件展示-->
+                    <div>
+                        <div style="margin: 10px 0 0 0">音频</div>
+                        <div style="padding: 10px 0 10px 27px; text-align: left">
+                            <div ng-repeat="img in relist.reportList['editData']['data']['resourceVoice'] track by $index"
+                                 ng-click="relist.playPauseVoice($index)"
+                                 style="cursor: pointer;border: 1px solid lightgrey; padding: 7px;display: inline-block;margin: 0 12px 12px 0;">
+                                <span ng-class="{'fa fa-play-circle':!img['play'], 'fa fa-pause-circle':img['play']}"
+                                      style="font-size: 30px; color: #608fb7; background: #e2e2e2; width: 50px; height: 50px; padding: 9px 0 0 12px"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
+
+        <div style="height: 100%; width: 0"></div>
+
+
+        <!-- 文本 -->
+        <!--<span id="4" name="Text_4" style="position: absolute;top: 84px; height: 40px; z-index:10000; left: 217px; width: 170px; font-size: 28px; font-weight: bold; color: rgba(19,18,18,1.0); background:rgba(255,255,255,1); ">诉讼详情</span>-->
+        <!--&lt;!&ndash; 文本 &ndash;&gt;-->
+        <!--<span id="6" name="Text_6" style="position: absolute;top: 153px; height: 40px; z-index:6; left: 284px; width: 170px; background:rgba(255,255,255,1); ">{{relist.reportList['editData']['data']['name']}}</span>-->
+        <!--&lt;!&ndash; 文本 &ndash;&gt;-->
+        <!--<span id="7" name="Text_7" style="position: absolute;top: 148px; height: 40px; z-index:7; left: 586px; width: 170px; background:rgba(255,255,255,1); ">{{relist.reportList['editData']['data']['contact']}}</span>-->
+        <!--&lt;!&ndash; 文本 &ndash;&gt;-->
+        <!--<span id="8" name="Text_8" style="position: absolute;top: 143px; height: 40px; z-index:8; left: 932px; width: 170px; background:rgba(255,255,255,1); ">{{relist.reportList['editData']['data']['create_time']}}</span>-->
+        <!--&lt;!&ndash; 文本 &ndash;&gt;-->
+        <!--<span id="9" name="Text_9" style="position: absolute;top: 211px; height: 40px; z-index:9; left: 284px; width: 170px; font-size: 18px; font-weight: bold; color: rgba(29,26,26,1.0); background:rgba(255,255,255,1); ">诉讼内容：</span>-->
+        <!--&lt;!&ndash; 文本 &ndash;&gt;-->
+        <!--<span id="10" name="Text_10" style="position: absolute;top: 278px; height: 317px; z-index:10; left: 283px; width: 765px; background:rgba(214,199,199,1); ">{{relist.reportList['editData']['data']['content']}}</span>-->
+        <!--&lt;!&ndash; 文本 &ndash;&gt;-->
+        <!--<span id="11" name="Text_11" style="position: absolute;top: 153px; height: 27px; z-index:11; left: 224px; width: 56px; font-weight: bold; color: rgba(29,26,26,1.0); background:rgba(255,255,255,1); ">诉讼人：</span>-->
+        <!--&lt;!&ndash; 文本 &ndash;&gt;-->
+        <!--<span id="12" name="Text_12" style="position: absolute;top: 149px; height: 27px; z-index:12; left: 506px; width: 71px; font-weight: bold; color: rgba(29,26,26,1.0); background:rgba(255,255,255,1); ">联系方式：</span>-->
+        <!--&lt;!&ndash; 文本 &ndash;&gt;-->
+        <!--<span id="13" name="Text_13" style="position: absolute;top: 143px; height: 27px; z-index:13; left: 855px; width: 71px; font-weight: bold; color: rgba(29,26,26,1.0); background:rgba(255,255,255,1); ">提交时间：</span>-->
+        <!-- 按钮 -->
+        <!--<button ng-click="relist.returnBackList()" id="2" name="Btn_2" style="position: absolute;top: 85px; height: 42px; z-index:2; left: 34px; width: 87px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(247,235,235,0.4); border-radius: 5px 5px 5px 5px; background:rgba(28,194,217,1); font-size: 23px; font-family: 宋体; color: rgba(0,0,0,1.0); text-decoration: blink; text-align: center; ">返回</button>-->
+
+        <!--图片 -->
+        <!--<div style="position: absolute;top: 612px;left: 257px;z-index:58;text-align: left">-->
+        <!--<div class="coverImgShow" ng-repeat="img in relist.reportList['editData']['data']['resourceImg'] track by $index" id="58" name="Image_58" style="display: inline-block;margin-right: 7px;height: 70px; left: 268px; width: 68px; background: url({{img['url']}}) no-repeat ; background-size: cover; ">-->
+        <!--&lt;!&ndash;<div class="removeCoverImgShow" ng-click="content.deleteFriendImg($index)" style="position: relative;top: -5px;left: 53px;cursor: pointer;width: 20px;height: 20px;border-radius: 10px; background: #ff4747;">&ndash;&gt;-->
+        <!--&lt;!&ndash;<span aria-hidden="true" style="color: white;font-size: 15px;position: relative; top:2px; left: 6px">&times;</span>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!-- 按钮 -->
+        <!--<button id="14" name="Btn_14" style="position: absolute;top: 912px; height: 29px; z-index:10000; left: 257px; width: 49px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(247,235,235,0.4); border-radius: 5px 5px 5px 5px; background:rgba(28,194,217,1); font-size: 12px; font-family: 宋体; color: rgba(0,0,0,1.0); text-decoration: blink; text-align: center; ">图片</button>-->
+        <!--&lt;!&ndash; 按钮 &ndash;&gt;-->
+        <!--<button id="16" name="Btn_16" style="position: absolute;top: 912px; height: 29px; z-index:16; left: 324px; width: 72px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(247,235,235,0.4); border-radius: 5px 5px 5px 5px; background:rgba(28,194,217,1); font-size: 12px; font-family: 宋体; color: rgba(0,0,0,1.0); text-decoration: blink; text-align: center; ">播发语言</button>-->
+        <!--&lt;!&ndash;<video  width="300" height="200" controls autoplay>&ndash;&gt;-->
+        <!--&lt;!&ndash;<source src= type="video/mp4" />&ndash;&gt;-->
+        <!--&lt;!&ndash;Your browser does not support the <video> element.&ndash;&gt;-->
+        <!--&lt;!&ndash;</video>&ndash;&gt;-->
+        <!--&lt;!&ndash; 按钮 &ndash;&gt;-->
+        <!--<button id="17" name="Btn_17" style="position: absolute;top: 912px; height: 29px; z-index:17; left: 418px; width: 72px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(247,235,235,0.4); border-radius: 5px 5px 5px 5px; background:rgba(28,194,217,1); font-size: 12px; font-family: 宋体; color: rgba(0,0,0,1.0); text-decoration: blink; text-align: center; ">下载附件</button>-->
+        <!--&lt;!&ndash; 按钮 &ndash;&gt;-->
+        <!--<button ng-click="relist.moveViewReport(0)" id="18" name="Btn_18" style="position: absolute;top: 912px; height: 29px; z-index:18; left: 869px; width: 72px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(247,235,235,0.4); border-radius: 5px 5px 5px 5px; background:rgba(28,194,217,1); font-size: 12px; font-family: 宋体; color: rgba(0,0,0,1.0); text-decoration: blink; text-align: center; ">上一条</button>-->
+        <!--&lt;!&ndash; 按钮 &ndash;&gt;-->
+        <!--<button ng-click="relist.moveViewReport(1)" id="19" name="Btn_19" style="position: absolute;top: 912px; height: 29px; z-index:19; left: 971px; width: 72px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(247,235,235,0.4); border-radius: 5px 5px 5px 5px; background:rgba(28,194,217,1); font-size: 12px; font-family: 宋体; color: rgba(0,0,0,1.0); text-decoration: blink; text-align: center; ">下一条</button>-->
     </div>
 
-    <!-- 按钮 -->
-    <button id="14" name="Btn_14" style="position: absolute;top: 912px; height: 29px; z-index:10000; left: 257px; width: 49px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(247,235,235,0.4); border-radius: 5px 5px 5px 5px; background:rgba(28,194,217,1); font-size: 12px; font-family: 宋体; color: rgba(0,0,0,1.0); text-decoration: blink; text-align: center; ">图片</button>
-    <!-- 按钮 -->
-    <button id="16" name="Btn_16" style="position: absolute;top: 912px; height: 29px; z-index:16; left: 324px; width: 72px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(247,235,235,0.4); border-radius: 5px 5px 5px 5px; background:rgba(28,194,217,1); font-size: 12px; font-family: 宋体; color: rgba(0,0,0,1.0); text-decoration: blink; text-align: center; ">播发语言</button>
-    <!--<video  width="300" height="200" controls autoplay>-->
-        <!--<source src= type="video/mp4" />-->
-        <!--Your browser does not support the <video> element.-->
-    <!--</video>-->
-    <!-- 按钮 -->
-    <button id="17" name="Btn_17" style="position: absolute;top: 912px; height: 29px; z-index:17; left: 418px; width: 72px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(247,235,235,0.4); border-radius: 5px 5px 5px 5px; background:rgba(28,194,217,1); font-size: 12px; font-family: 宋体; color: rgba(0,0,0,1.0); text-decoration: blink; text-align: center; ">下载附件</button>
-    <!-- 按钮 -->
-    <button ng-click="relist.moveViewReport(0)" id="18" name="Btn_18" style="position: absolute;top: 912px; height: 29px; z-index:18; left: 869px; width: 72px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(247,235,235,0.4); border-radius: 5px 5px 5px 5px; background:rgba(28,194,217,1); font-size: 12px; font-family: 宋体; color: rgba(0,0,0,1.0); text-decoration: blink; text-align: center; ">上一条</button>
-    <!-- 按钮 -->
-    <button ng-click="relist.moveViewReport(1)" id="19" name="Btn_19" style="position: absolute;top: 912px; height: 29px; z-index:19; left: 971px; width: 72px; padding: 6px 12px 6px 12px; border-width: 1px 1px 1px 1px; border-style: solid; border-color: rgba(247,235,235,0.4); border-radius: 5px 5px 5px 5px; background:rgba(28,194,217,1); font-size: 12px; font-family: 宋体; color: rgba(0,0,0,1.0); text-decoration: blink; text-align: center; ">下一条</button>
 </div>
