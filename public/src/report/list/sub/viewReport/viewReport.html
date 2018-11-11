@@ -58,10 +58,11 @@
 
                     <!--页面最后的上一条，下一条，下载按钮-->
                     <div style="position: absolute; bottom: 20px;text-align: center; width: 100%">
-                        <button class="btn btn-default" ng-click="relist.moveViewReport(0)">上一条</button>
-                        <button class="btn btn-default" ng-click="relist.moveViewReport(1)" style="margin-left: 10px">下一条</button>
+                        <button class="btn btn-default" ng-click="relist.moveViewReport(0)" style="outline: none;">上一条</button>
+                        <button class="btn btn-default" ng-click="relist.moveViewReport(1)" style="outline: none;margin-left: 20px">下一条</button>
                         <!--资源文件下载-->
-                        <button class="btn btn-default" style="margin-left: 10px; border-color: #608fb7" ng-click="relist.downloadZipResourceFile()">
+                        <button ng-if="relist.reportList['editData']['data']['resourceImg'].length>0 && relist.reportList['editData']['data']['resourceVoice'].length>0"
+                                class="btn btn-default" style="outline: none;margin-left: 20px; border-color: #608fb7" ng-click="relist.downloadZipResourceFile()">
                             <span class="fa fa-download" style="color: #608fb7"></span>
                             <span style="color: #296780">下载图片音频附件</span>
                         </button>
@@ -73,7 +74,10 @@
 
                     <!--图片资源文件展示-->
                     <div style="">
-                        <div style="margin: 15px 0 0 0">图片</div>
+                        <div style="margin: 15px 0 0 0;">
+                            <span>图片</span>
+                            <span ng-if="relist.reportList['editData']['data']['resourceImg'].length==0">（暂无）</span>
+                        </div>
                         <div style="padding: 10px 0 10px 27px; text-align: left">
                             <div ng-repeat="img in relist.reportList['editData']['data']['resourceImg'] track by $index"
                                  ng-click="relist.viewLargeImg($index)"
@@ -84,7 +88,10 @@
                     </div>
                     <!--音频资源文件展示-->
                     <div>
-                        <div style="margin: 10px 0 0 0">音频</div>
+                        <div style="margin: 15px 0 0 0; ">
+                            <span>音频</span>
+                            <span ng-if="relist.reportList['editData']['data']['resourceVoice'].length==0">（暂无）</span>
+                        </div>
                         <div style="padding: 10px 0 10px 27px; text-align: left">
                             <div ng-repeat="img in relist.reportList['editData']['data']['resourceVoice'] track by $index"
                                  ng-click="relist.playPauseVoice($index)"
