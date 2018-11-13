@@ -19,7 +19,7 @@
 
         <!--左侧导航栏-->
         <!--供电朋友圈-->
-        <span id="51" name="Text_51" style="cursor: pointer;position: absolute;top: 164px; height: 42px; z-index:51; left: 50px; width: 159px; padding: 10px 0px 0px 0px; color: white; text-align: center; border-radius: 20px 20px 20px 20px; background:#d85a54;">诉讼列表</span>
+        <span id="51" name="Text_51" style="cursor: pointer;position: absolute;top: 164px; height: 42px; z-index:51; left: 50px; width: 159px; padding: 10px 0px 0px 0px; color: white; text-align: center; border-radius: 20px 20px 20px 20px; background:#d85a54;">反映列表</span>
         <!--新闻公告管理-->
         <!--<span id="34" name="Text_34" style="cursor: pointer;position: absolute;top: 216px; height: 42px; z-index:34; left: 16px; width: 157px; padding: 10px 0px 0px 0px; color: rgba(255,255,255,1); text-align: center; border-radius: 20px 20px 20px 20px; background:rgba(255,255,255,0.16); ">新闻公告管理</span>-->
         <!--审核员设置-->
@@ -79,17 +79,20 @@
                 <thead>
                 <!--列名 columns name-->
                 <tr>
-                    <th style="text-align: center; width: 60px;">
+                    <th style="text-align: center; width: 40px;">
                         <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">选择</span>
                     </th>
-                    <th style="text-align: center; width: 128px; ">
-                        <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">诉讼类型</span>
+                    <th style="text-align: center; width: 78px;">
+                        <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">编号</span>
                     </th>
-                    <th style="text-align: center; width: 278px; ">
+                    <th style="text-align: center; width: 128px; ">
+                        <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">反映类型</span>
+                    </th>
+                    <th style="text-align: center; width: 170px; ">
                         <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">摘要</span>
                     </th>
                     <th style="text-align: center; width: 89px; ">
-                        <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">诉讼人姓名</span>
+                        <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">反映人姓名</span>
                     </th>
                     <th style="text-align: center; width: 78px; ">
                         <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">联系电话</span>
@@ -97,7 +100,7 @@
                     <!--<th style="text-align: center; width: 78px; ">-->
                     <!--<span style="font-size: 14px;color: #4a4a4a;font-weight: bold">状态</span>-->
                     <!--</th>-->
-                    <th style="text-align: center; width: 200px; ">
+                    <th style="text-align: center; width: 130px; ">
                         <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">创建时间</span>
                     </th>
                     <th style="text-align: center; width: 78px; ">
@@ -111,14 +114,17 @@
                 <!--表格内容 table content-->
                 <tbody>
                 <tr ng-repeat="report in relist['reportList']['list'] | limitTo:relist['overallData']['screenNum']: relist['overallData']['pagination']['beginListIndex'] track by $index" style="height:50px;">
-                    <th style=" width: 60px;text-align: center">
+                    <th style=" width: 40px;text-align: center">
                         <input style="margin-top: 12px" type="checkbox" ng-model="news['toDelete']">
                     </th>
+                    <td style="padding: 15px 0 0 0;text-align: center; width: 78px;">
+                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{report['timestamp']}}</span>
+                    </td>
                     <td style="padding: 15px 0 0 0;text-align: center; width: 128px;">
                         <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{relist.overallData['mapData']['newsType'][report['realm']]}}</span>
                     </td>
-                    <td style="padding: 15px 0 0 0;text-align: center; width: 278px;font-size: 13px;">
-                        <span style="width: 270px;display: inline-block;font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);overflow: hidden; white-space: nowrap; text-overflow: ellipsis">{{report['content']}}</span>
+                    <td style="padding: 15px 0 0 0;text-align: center; width: 170px;font-size: 13px;">
+                        <span style="width: 170px;display: inline-block;font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);overflow: hidden; white-space: nowrap; text-overflow: ellipsis">{{report['content']}}</span>
                     </td>
                     <td style="padding: 15px 0 0 0;text-align: center; width: 89px;">
                         <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{report['name']}}</span>
@@ -130,7 +136,7 @@
                     <!--<span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);" ng-if="report['status']==1">待处理</span>-->
                     <!--<span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);" ng-if="report['status']==2">已处理</span>-->
                     <!--</td>-->
-                    <td style="padding: 15px 0 0 0;text-align: center; width: 200px;">
+                    <td style="padding: 15px 0 0 0;text-align: center; width: 130px;">
                         <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{report['create_time']}}</span>
                     </td>
                     <td style="padding: 15px 0 0 0;text-align: center; width: 78px;">

@@ -18,7 +18,6 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
         } else {
             data['create_time'] = ReListDataSer.reportList[ReListDataSer.reportList.length - 1]['create_time'];
         }
-        //alert(JSON.stringify(data));
 
         //http请求数据
         OverallGeneralSer.httpPostData(OverallDataSer.urlData['backEndHttp']['getRangeReport'], data, function (responseData) {

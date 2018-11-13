@@ -109,9 +109,8 @@ app.controller('ReportListCtrl', function ($scope, ReListDataSer, ReportSer, ReL
      * 下载所有图片和音频数据
      */
     relist.downloadZipResourceFile = function () {
-        var name = "files.zip";
-        var fileName = ReListDataSer.reportList['editData']['data']['openid'] +
-            ReListDataSer.reportList['editData']['data']['timestamp'] + ".zip";
+        var name = ReListDataSer.reportList['editData']['data']['timestamp'] + ".zip";
+        var fileName = ReListDataSer.reportList['editData']['data']['openid'] + name;
         var fileUrl = OverallDataSer.urlData['frontEndHttp']['getReportResource'] + fileName;
         ReportGeneral.downloadFile(name, fileUrl);
     }

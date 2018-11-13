@@ -21,6 +21,7 @@ app.factory('ReportGeneral', function ($http, $window, $location, ReListDataSer,
         ReListDataSer.reportList['editData']['data']['create_time'] = ReListDataSer.reportList['list'][index]['create_time'];
         ReListDataSer.reportList['editData']['data']['content'] = ReListDataSer.reportList['list'][index]['content'];
         ReListDataSer.reportList['editData']['data']['realm'] = ReListDataSer.reportList['list'][index]['realm'];
+        ReListDataSer.reportList['editData']['data']['status'] = ReListDataSer.reportList['list'][index]['status'];
 
         //获取资源数据
         var sendData = {

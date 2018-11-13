@@ -9,13 +9,7 @@
 
             <!--页面头部-->
             <div style="z-index: 100;height: 60px; border: 1px solid lightgrey;text-align: left">
-                <span style="font-size: 16px; position: relative;left: 20px; top: 17px;">
-                    诉讼信息
-                    <span ng-if="relist.reportList['editData']['data']['status']==1"
-                          style="color: orange; font-weight: bold">（待处理）</span>
-                    <span ng-if="relist.reportList['editData']['data']['status']==2"
-                          style="color: mediumseagreen; font-weight: bold">（已处理）</span>
-                </span>
+                <span style="font-size: 16px; position: relative;left: 20px; top: 17px;">反映信息</span>
                 <span ng-click="relist.navigation['report']['viewReport']=false"
                       style="float: right; position: relative; top:7px; right: 30px; font-size: 27px; cursor: pointer;color: grey">&times;</span>
             </div>
@@ -23,18 +17,35 @@
             <!--展示诉讼信息-->
             <div style="flex: 1; display: flex; flex-direction: row;">
                 <div style="flex: 2; border: 1px solid lightgrey; border-width: 0 1px 0 0;text-align: left; padding: 20px 20px;font-size: 15px; position: relative">
+                    <div style="display: flex; flex-direction: row;margin: 0 0 10px 0;">
+                        <div style="flex: 1">
+                            <span class='fa fa-send' style="color: #608fb7; position: relative; left: -2px"></span>
+                            <span style="margin-left: 4px">状态：</span>
+                            <span style="margin-left: 28px">
+                                <span ng-if="relist.reportList['editData']['data']['status']==1">待处理</span>
+                                <span ng-if="relist.reportList['editData']['data']['status']==2">已处理</span>
+                            </span>
+                        </div>
+                        <div style="flex: 1">
+                            <span class="fa fa-asterisk" style="color: #608fb7; position: relative; left: -2px"></span>
+                            <span style="margin-left: 8px">编号：</span>
+                            <span style="margin-left: 27px">{{relist.reportList['editData']['data']['timestamp']}}</span>
+                        </div>
+                    </div>
+
                     <div style="display: flex; flex-direction: row;">
                         <div style="flex: 1">
-                            <span class='fa fa-user-o' style="color: #608fb7"></span>
-                            <span style="margin-left: 5px">诉讼人：</span>
+                            <span class='fa fa-user-o' style="color: #608fb7; position: relative; left: -2px"></span>
+                            <span style="margin-left: 5px">反映人：</span>
                             <span style="margin-left: 16px">{{relist.reportList['editData']['data']['name']}}</span>
                         </div>
                         <div style="flex: 1">
                             <span class='fa fa-mobile' style="color: #608fb7; font-size: 22px"></span>
-                            <span style="margin-left: 10px">联系方式：</span>
-                            <span>{{relist.reportList['editData']['data']['contact']}}</span>
+                            <span style="margin-left: 12px;position: relative; top: -2px;">联系方式：</span>
+                            <span style="position: relative; top: -2px">{{relist.reportList['editData']['data']['contact']}}</span>
                         </div>
                     </div>
+
                     <div style="display: flex; flex-direction: row;margin: 10px 0 0 0;">
                         <div style="flex: 1">
                             <span class='fa fa-gg' style="color: #608fb7; position: relative; left: -2px"></span>
@@ -50,7 +61,7 @@
 
                     <div style="display: flex; flex-direction: row; margin: 13px 0 0 0;">
                         <span class="fa fa-list-alt" style="color: #608fb7; position: relative; top: 3px;"></span>
-                        <div style="width: 80px; margin-left: 7px">诉讼内容：</div>
+                        <div style="width: 80px; margin-left: 7px">反映内容：</div>
                         <div style="flex: 1; padding: 0 30px 0 0">{{relist.reportList['editData']['data']['content']}}
                         </div>
                     </div>
@@ -58,11 +69,15 @@
 
                     <!--页面最后的上一条，下一条，下载按钮-->
                     <div style="position: absolute; bottom: 20px;text-align: center; width: 100%">
-                        <button class="btn btn-default" ng-click="relist.moveViewReport(0)" style="outline: none;">上一条</button>
-                        <button class="btn btn-default" ng-click="relist.moveViewReport(1)" style="outline: none;margin-left: 20px">下一条</button>
+                        <button class="btn btn-default" ng-click="relist.moveViewReport(0)" style="outline: none;">上一条
+                        </button>
+                        <button class="btn btn-default" ng-click="relist.moveViewReport(1)"
+                                style="outline: none;margin-left: 20px">下一条
+                        </button>
                         <!--资源文件下载-->
                         <button ng-if="relist.reportList['editData']['data']['resourceImg'].length>0 && relist.reportList['editData']['data']['resourceVoice'].length>0"
-                                class="btn btn-default" style="outline: none;margin-left: 20px; border-color: #608fb7" ng-click="relist.downloadZipResourceFile()">
+                                class="btn btn-default" style="outline: none;margin-left: 20px; border-color: #608fb7"
+                                ng-click="relist.downloadZipResourceFile()">
                             <span class="fa fa-download" style="color: #608fb7"></span>
                             <span style="color: #296780">下载图片音频附件</span>
                         </button>
