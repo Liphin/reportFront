@@ -81,7 +81,7 @@
                                 style="outline: none;margin-left: 20px">下一条
                         </button>
                         <!--资源文件下载-->
-                        <button ng-if="!(relist.reportList['editData']['data']['resourceImg'].length<0 && relist.reportList['editData']['data']['resourceVoice'].length<0)"
+                        <button ng-if="!(relist.reportList['editData']['data']['resourceImg'].length==0 && relist.reportList['editData']['data']['resourceVoice'].length==0)"
                                 class="btn btn-default" style="outline: none;margin-left: 20px; border-color: #608fb7"
                                 ng-click="relist.downloadZipResourceFile()">
                             <span class="fa fa-download" style="color: #608fb7"></span>

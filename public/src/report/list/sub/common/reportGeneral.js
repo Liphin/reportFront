@@ -8,25 +8,25 @@ app.factory('ReportGeneral', function ($http, $window, $location, ReListDataSer,
     /**
      * 查看详情
      */
-    var viewReport = function (index) {
+    var viewReport = function (report) {
 
         //打开预览页面并展示基础文本数据
         ReListDataSer.navigation['report']['viewReport'] = true;
-        ReListDataSer.reportList['editData']['editIndex'] = index;
-        ReListDataSer.reportList['editData']['timestamp'] = ReListDataSer.reportList['list'][index]['timestamp'];
-        ReListDataSer.reportList['editData']['data']['openid'] = ReListDataSer.reportList['list'][index]['openid'];
-        ReListDataSer.reportList['editData']['data']['name'] = ReListDataSer.reportList['list'][index]['name'];
-        ReListDataSer.reportList['editData']['data']['contact'] = ReListDataSer.reportList['list'][index]['contact'];
-        ReListDataSer.reportList['editData']['data']['timestamp'] = ReListDataSer.reportList['list'][index]['timestamp'];
-        ReListDataSer.reportList['editData']['data']['create_time'] = ReListDataSer.reportList['list'][index]['create_time'];
-        ReListDataSer.reportList['editData']['data']['content'] = ReListDataSer.reportList['list'][index]['content'];
-        ReListDataSer.reportList['editData']['data']['realm'] = ReListDataSer.reportList['list'][index]['realm'];
-        ReListDataSer.reportList['editData']['data']['status'] = ReListDataSer.reportList['list'][index]['status'];
-        ReListDataSer.reportList['editData']['data']['view'] = ReListDataSer.reportList['list'][index]['view'];
+        //ReListDataSer.reportList['editData']['editIndex'] = index;
+        ReListDataSer.reportList['editData']['timestamp'] = report['timestamp'];
+        ReListDataSer.reportList['editData']['data']['openid'] = report['openid'];
+        ReListDataSer.reportList['editData']['data']['name'] = report['name'];
+        ReListDataSer.reportList['editData']['data']['contact'] = report['contact'];
+        ReListDataSer.reportList['editData']['data']['timestamp'] = report['timestamp'];
+        ReListDataSer.reportList['editData']['data']['create_time'] = report['create_time'];
+        ReListDataSer.reportList['editData']['data']['content'] = report['content'];
+        ReListDataSer.reportList['editData']['data']['realm'] = report['realm'];
+        ReListDataSer.reportList['editData']['data']['status'] = report['status'];
+        ReListDataSer.reportList['editData']['data']['view'] = report['view'];
 
         //获取资源数据
         var sendData = {
-            'timestamp': ReListDataSer.reportList['list'][index]['timestamp']
+            'timestamp': report['timestamp']
         };
         var url = OverallDataSer.urlData['backEndHttp']['getReportImgAndVoiceToPc'];
         var resourceUrl = OverallDataSer.urlData['frontEndHttp']['getReportResource'];

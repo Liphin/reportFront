@@ -58,8 +58,8 @@ app.controller('ReportListCtrl', function ($scope, ReListDataSer, ReportSer, ReL
      * 诉讼列表中针对每条诉讼的操作：如删除，详情等
      * @see ReListSer.newsOpt
      */
-    relist.ReListOpt = function (optType, reportId, index) {
-        ReListSer.ReListOpt(optType, reportId, index);
+    relist.ReListOpt = function (optType, report) {
+        ReListSer.ReListOpt(optType, report);
     };
 
     /**

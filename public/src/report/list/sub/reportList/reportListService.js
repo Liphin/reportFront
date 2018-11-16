@@ -209,20 +209,19 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
     /**
      * 新闻操作
      * @param optType
-     * @param newsId
-     * @param index
+     * @param report
      */
-    var ReListOpt = function (optType, reportId, index) {
+    var ReListOpt = function (optType, report) {
         //关闭编辑操作菜单
-        ReListDataSer.reportList['list'][index]['menu'] = false;
+        //report['menu'] = false;
         //根据不同操作类型相应操作
         switch (optType) {
             case 'view': {
-                viewReport(index);
+                viewReport(report);
                 break;
             }
             case 'delete': {
-                deleteReport(reportId, index);
+                deleteReport(report);
                 break;
             }
             default: {
@@ -234,10 +233,10 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
     /**
      * 删除指定新闻数据
      */
-    var deleteReport = function (reportId, index) {
+    var deleteReport = function (report) {
         var fd = new FormData();
         var url = OverallDataSer.urlData['backEndHttp']['deleteReport'];
-        fd.append('timestamp', ReListDataSer.reportList['list'][index]['timestamp']);
+        fd.append('timestamp', report['timestamp']);
 
         //提交表单数据
         $http.post(url, fd, {
@@ -265,23 +264,23 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
     /**
      * 查看详情
      */
-    var viewReport = function (index) {
+    var viewReport = function (report) {
         //传递index，预览指定下标的诉讼数据
-        ReportGeneral.viewReport(index);
+        ReportGeneral.viewReport(report);
         //发送http请求到后台更换状态标识已阅和未阅
-        updateViewStatus(index);
+        updateViewStatus(report);
     };
 
 
     /**
      * 异步更新阅读状态
      */
-    var updateViewStatus = function (index) {
+    var updateViewStatus = function (report) {
         var url = OverallDataSer.urlData['backEndHttp']['updateViewStatus'];
-        var data = {'timestamp': ReListDataSer.reportList['list'][index]['timestamp']};
+        var data = {'timestamp': report['timestamp']};
         OverallGeneralSer.httpPostData(url, data, function (responseData) {
             //异步更新阅读状态完成
-            ReListDataSer.reportList['list'][index]['view']=2;
+            report['view']=2;
 
         }, false);
     };
