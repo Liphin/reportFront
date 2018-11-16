@@ -27,8 +27,9 @@ overallModule.factory('OverallDataSer', function ($rootScope) {
             'getRangeReport': baseUrlData['backEndHttp'] + 'getRangeReport',
             'searchReportList': baseUrlData['backEndHttp'] + 'searchReportList',
             'deleteReport': baseUrlData['backEndHttp'] + 'deleteReport',
+            'updateViewStatus': baseUrlData['backEndHttp'] + 'updateViewStatus',
             'deleteBranchReport': baseUrlData['backEndHttp'] + 'deleteBranchReport',
-            'getReportImgAndVoiceToPc': baseUrlData['backEndHttp'] + 'getReportImgAndVoiceToPc',
+            'getReportImgAndVoiceToPc': baseUrlData['backEndHttp'] + 'getReportImgAndVoiceToPc'
         },
         'frontEndHttp': {
             'getSqlKeyWord': baseUrlData['frontEndHttp'] + 'helper/sqlKeyWord.txt',

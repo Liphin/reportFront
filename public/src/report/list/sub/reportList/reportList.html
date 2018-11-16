@@ -97,9 +97,9 @@
                     <th style="text-align: center; width: 78px; ">
                         <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">联系电话</span>
                     </th>
-                    <!--<th style="text-align: center; width: 78px; ">-->
-                    <!--<span style="font-size: 14px;color: #4a4a4a;font-weight: bold">状态</span>-->
-                    <!--</th>-->
+                    <th style="text-align: center; width: 40px; ">
+                        <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">状态</span>
+                    </th>
                     <th style="text-align: center; width: 130px; ">
                         <span style="font-size: 14px;color: #4a4a4a;font-weight: bold">创建时间</span>
                     </th>
@@ -132,10 +132,10 @@
                     <td style="padding: 15px 0 0 0;text-align: center; width: 78px;">
                         <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{report['contact']}}</span>
                     </td>
-                    <!--<td style="padding: 15px 0 0 0;text-align: center; width: 78px;">-->
-                    <!--<span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);" ng-if="report['status']==1">待处理</span>-->
-                    <!--<span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);" ng-if="report['status']==2">已处理</span>-->
-                    <!--</td>-->
+                    <td style="padding: 15px 0 0 0;text-align: center; width: 40px;">
+                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);" ng-if="report['view']==1">未阅</span>
+                        <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);" ng-if="report['view']==2">已阅</span>
+                    </td>
                     <td style="padding: 15px 0 0 0;text-align: center; width: 130px;">
                         <span style="font-size: 13px;font-weight: normal;font-family: microsoft yahei;font-style: normal;text-decoration: none;color: rgba(0,0,0,1.0);">{{report['create_time']}}</span>
                     </td>

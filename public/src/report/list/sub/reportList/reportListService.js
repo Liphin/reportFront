@@ -268,6 +268,22 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
     var viewReport = function (index) {
         //传递index，预览指定下标的诉讼数据
         ReportGeneral.viewReport(index);
+        //发送http请求到后台更换状态标识已阅和未阅
+        updateViewStatus(index);
+    };
+
+
+    /**
+     * 异步更新阅读状态
+     */
+    var updateViewStatus = function (index) {
+        var url = OverallDataSer.urlData['backEndHttp']['updateViewStatus'];
+        var data = {'timestamp': ReListDataSer.reportList['list'][index]['timestamp']};
+        OverallGeneralSer.httpPostData(url, data, function (responseData) {
+            //异步更新阅读状态完成
+            ReListDataSer.reportList['list'][index]['view']=2;
+
+        }, false);
     };
 
 
@@ -316,6 +332,7 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
         showTargetNumReportList: showTargetNumReportList,
         searchReportList: searchReportList,
         ReListOpt: ReListOpt,
+        updateViewStatus: updateViewStatus,
         deleteBatchReport: deleteBatchReport,
     }
 

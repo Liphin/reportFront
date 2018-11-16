@@ -9,7 +9,13 @@
 
             <!--页面头部-->
             <div style="z-index: 100;height: 60px; border: 1px solid lightgrey;text-align: left">
-                <span style="font-size: 16px; position: relative;left: 20px; top: 17px;">反映信息</span>
+                <span style="font-size: 16px; position: relative;left: 20px; top: 17px;">
+                    <span>反映信息</span>
+                    <span>
+                        <span ng-if="relist.reportList['editData']['data']['view']==1"> （未阅）</span>
+                        <span style="color: #39b139" ng-if="relist.reportList['editData']['data']['view']==2"> （已阅）</span>
+                    </span>
+                </span>
                 <span ng-click="relist.navigation['report']['viewReport']=false"
                       style="float: right; position: relative; top:7px; right: 30px; font-size: 27px; cursor: pointer;color: grey">&times;</span>
             </div>
@@ -75,7 +81,7 @@
                                 style="outline: none;margin-left: 20px">下一条
                         </button>
                         <!--资源文件下载-->
-                        <button ng-if="relist.reportList['editData']['data']['resourceImg'].length>0 && relist.reportList['editData']['data']['resourceVoice'].length>0"
+                        <button ng-if="!(relist.reportList['editData']['data']['resourceImg'].length<0 && relist.reportList['editData']['data']['resourceVoice'].length<0)"
                                 class="btn btn-default" style="outline: none;margin-left: 20px; border-color: #608fb7"
                                 ng-click="relist.downloadZipResourceFile()">
                             <span class="fa fa-download" style="color: #608fb7"></span>
