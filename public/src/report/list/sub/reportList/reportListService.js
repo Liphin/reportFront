@@ -16,7 +16,7 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
             data['create_time'] = ReListDataSer.MAX_CREATE_TIME;
 
         } else {
-            data['create_time'] = ReListDataSer.reportList[ReListDataSer.reportList.length - 1]['create_time'];
+            data['create_time'] = ReListDataSer.reportList['list'][ReListDataSer.reportList['list'].length - 1]['create_time'];
         }
 
         //http请求数据
@@ -131,7 +131,7 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
         ReListDataSer.overallData['pagination']['beginPageNum'] +=
             changeBatch * ReListDataSer.overallData['maxShowPage'];
         //设置active装态的数据
-        ContentGeneralSer.showTargetNumNewsList(0, ReListDataSer.overallData['pagination']['beginPageNum']);
+        showTargetNumReportList(0, ReListDataSer.overallData['pagination']['beginPageNum']);
 
         //两个判断条件
         // A： 如果之前获取过的分页数据最大页数大于当前页面最大页数则说明下一批数据之前已经获取过，
@@ -143,9 +143,9 @@ app.factory('ReListSer', function ($http, $window, $location, ReListDataSer, Ove
 
         } else {
             //装填分页展示信息
-            ContentGeneralSer.loadPageInfo();
+            loadPageInfo();
             //设置是否允许获取上一批次和下一批次数据
-            ContentGeneralSer.setPreNextLoadBatchData();
+            setPreNextLoadBatchData();
         }
     };
 
