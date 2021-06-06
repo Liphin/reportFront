@@ -1,4 +1,5 @@
 # reportFront
 
 This project use node.js + express as backend and angularjs as frontend
-Start up:  node server/server.js
+
+Start up function :  node server/server.js
